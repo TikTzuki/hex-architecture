@@ -8,6 +8,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 
 from project.core.exception import LOSException
+from project import router
 from project.settings.configs import APPLICATION
 from project.settings.middleware import middleware_setting
 
@@ -21,14 +22,13 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=APPLICATION["allowed_hosts"] or ["*"],
+    allow_origins=APPLICATION.allowed_hosts or ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["POST", "GET"],
 )
 
-
-# app.include_router(router=v1_router.router, prefix="/api/v1")
+app.include_router(router=router.router, prefix="/api/v1")
 
 
 @app.middleware("http")
@@ -40,7 +40,7 @@ async def time_header(request: Request, call_next):
 async def los_http_exception_handler(request: Request, exc: LOSException):
     return JSONResponse(
         content={
-            "errors": LOSException.arrow_error_pipeline(exc.get_detail()),
+            "errors": exc.get_detail(),
         },
         status_code=exc.status_code,
         headers=exc.headers
@@ -50,12 +50,12 @@ async def los_http_exception_handler(request: Request, exc: LOSException):
 @app.exception_handler(RequestValidationError)
 async def except_custom(request: Request, exc: RequestValidationError):  # noqa
     return JSONResponse(
+        content={
+            "errors": LOSException.errors_pipeline(exc.errors())
+        },
         status_code=status.HTTP_400_BAD_REQUEST,
-        content={"errors": jsonable_encoder(
-            LOSException.arrow_error_pipeline(LOSException.errors_pipeline(exc.errors()))
-        )}
     )
 
 
 if __name__ == "__main__":
-    uvicorn.run('app.main:app', host="127.0.0.1", port=7111, reload=True)
+    uvicorn.run('main:app', host="127.0.0.1", port=8000, reload=True)

@@ -1,12 +1,31 @@
-import json
 from datetime import datetime
-from typing import Dict, List, Union
 
-from sqlalchemy import VARCHAR, Column, DateTime, String, TypeDecorator, func
-from sqlalchemy.orm import as_declarative, declarative_base, declared_attr
+from loguru import logger
+from sqlalchemy import VARCHAR, Column, DateTime, String, func
+from sqlalchemy import create_engine
+from sqlalchemy.orm import as_declarative, declared_attr
+from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.pool import NullPool
+
+from project.settings.configs import DATABASES
+
+engine = create_engine(DATABASES.oracle.url, poolclass=NullPool)
+session_factory = sessionmaker(engine, expire_on_commit=False)
 
 
-# Dành cho những model nào không có field (created_at, created_by,modified_at,modified_by, uuid)
+def get_session() -> Session:
+    """Provide a transactional scope around a series of operations."""
+    session = session_factory()
+    try:
+        yield session
+    except Exception as e:
+        logger.exception(e)
+        session.rollback()
+    finally:
+        session.commit()
+        session.close()
+
+
 @as_declarative()
 class Base:
     __name__: str
@@ -19,7 +38,6 @@ class Base:
         return cls.__name__.lower()
 
 
-# Dành cho những model nào có field (created_at, created_by,modified_at,modified_by, uuid)
 @as_declarative()
 class BaseUtils:
     __name__: str
@@ -41,25 +59,3 @@ class BaseUtils:
     modified_by = Column("MODIFIED_BY", String(20), default=None)
 
     uuid = Column("UUID", VARCHAR(50))
-
-
-class JSONSQL(TypeDecorator):
-
-    @property
-    def python_type(self):
-        return Union[List, Dict]
-
-    impl = VARCHAR
-
-    def process_bind_param(self, value, dialect):
-        if value is None:
-            return None
-        return json.dumps(value)
-
-    def process_result_value(self, value, dialect):
-        if not value:
-            return None
-        return json.loads(value)
-
-
-BaseModel = declarative_base(cls=BaseUtils)

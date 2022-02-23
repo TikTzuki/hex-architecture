@@ -1,6 +1,6 @@
 from sqlalchemy import VARCHAR, Column
 
-from app.third_party.oracle.models.utils import Base
+from database import Base
 
 
 class Country(Base):

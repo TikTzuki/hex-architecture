@@ -6,7 +6,7 @@ from sqlacodegen.codegen import CodeGenerator
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
 
-from database.base import get_session, engine
+from database.base import engine, get_session
 
 
 class TestService:

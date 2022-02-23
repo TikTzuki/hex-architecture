@@ -1,7 +1,7 @@
-from sqlalchemy import Column, DateTime, Float, Integer, VARCHAR, text
+from sqlalchemy import VARCHAR, Column
 from sqlalchemy.dialects.oracle import NUMBER
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class CollMachine(BaseModel):
@@ -23,7 +23,6 @@ class CollMachine(BaseModel):
     amount = Column(NUMBER(asdecimal=False), comment='Số lượng (chiếc)')
 
 
-
 class CollMachineOwner(BaseModel):
     __tablename__ = 'v_los_coll_machine_owner'
     __table_args__ = {'comment': 'Bảng lưu thông tin chủ tài sản Máy móc dây chuyền sản xuất'}
@@ -33,4 +32,3 @@ class CollMachineOwner(BaseModel):
     person_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng Person để lấy đúng ID')
     owner_type_id = Column(VARCHAR(50), comment='Loại hình sở hữu (Chính chủ, Đồng sở hữu….)')
     display_order = Column(NUMBER(asdecimal=False), comment='Số thứ tự hiển thị ')
-

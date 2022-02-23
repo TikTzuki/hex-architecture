@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Float, Integer
 from sqlalchemy.dialects.oracle import VARCHAR2
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class ProfileIncome(BaseModel):

@@ -1,7 +1,7 @@
-from sqlalchemy import Column, DateTime, Float, Integer, VARCHAR, text
+from sqlalchemy import VARCHAR, Column, Float
 from sqlalchemy.dialects.oracle import NUMBER
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class Collateral(BaseModel):
@@ -14,4 +14,3 @@ class Collateral(BaseModel):
     credit_sequence_id = Column(NUMBER(asdecimal=False), comment='Table LOS_CREDIT_SEQUENCE_ITEM tham chiếu')
     gross_value = Column(Float, comment='Tổng số tiền được trong hồ sơ')
     price_cert_actived_flag = Column(VARCHAR(1), comment='Đã được xác nhận bằng chứng thư định giá')
-

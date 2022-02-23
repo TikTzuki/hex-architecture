@@ -1,7 +1,7 @@
 from sqlalchemy import CHAR, VARCHAR, Column
 from sqlalchemy.dialects.oracle import NUMBER
 
-from app.third_party.oracle.models.utils import Base
+from database import Base
 
 
 class CytmCcyDefnMaster(Base):

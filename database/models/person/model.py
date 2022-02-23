@@ -1,6 +1,6 @@
 from sqlalchemy import CHAR, VARCHAR, Column, DateTime, Integer
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class Person(BaseModel):

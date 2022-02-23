@@ -1,7 +1,7 @@
-from sqlalchemy import Column, DateTime, VARCHAR
+from sqlalchemy import VARCHAR, Column
 from sqlalchemy.dialects.oracle import NUMBER
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class CollCargo(BaseModel):
@@ -16,7 +16,6 @@ class CollCargo(BaseModel):
     description = Column(VARCHAR(200), comment='Mô tả tài sản')
 
 
-
 class CollCargoOwner(BaseModel):
     __tablename__ = 'v_los_coll_cargo_owner'
     __table_args__ = {'comment': 'Bảng lưu thông tin chủ tài sản Hàng hoá'}
@@ -26,4 +25,3 @@ class CollCargoOwner(BaseModel):
     person_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng Person để lấy đúng ID')
     owner_type_id = Column(VARCHAR(50), comment='Loại hình sở hữu (Chính chủ, Đồng sở hữu….)')
     display_order = Column(NUMBER(asdecimal=False), comment='Số thứ tự hiển thị ')
-

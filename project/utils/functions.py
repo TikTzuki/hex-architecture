@@ -6,8 +6,7 @@ from typing import Callable, Collection, Dict, List, Set, Tuple, Union
 from pydantic import UUID4
 from pydantic.fields import ModelField
 
-from app.repositories.utils.repo_utils import repo_base_get_utdm_by_fields_name
-from app.third_party.core.schemas import CustomBaseModel
+from project.core.schemas import CustomBaseModel
 
 
 def today():
@@ -133,35 +132,6 @@ def is_integer_num(n):
         return int(n)
 
     return float(n)
-
-
-async def get_data_udtm_by_fields_name(oracle_session, fields_name: list) -> dict:
-    """
-        Lấy dữ liệu table UDTM dựa theo fields_name
-
-        :params :
-            - field_name: [ABLE_PAY_LABEL, ACCEPT_CREDIT_LABEL, ...]
-
-        :response:
-            data = {
-                ABLE_PAY_LABEL: [Y, N,..],
-                ACCEPT_CREDIT_LABEL: [Y, N,..],
-            }
-    """
-
-    is_status, data_udtm = await repo_base_get_utdm_by_fields_name(
-        oracle_session=oracle_session,
-        fields_name=fields_name
-    )
-    if not is_status:
-        return {}
-    data = {}
-    for udtm in data_udtm:
-        if data.get(udtm.field_name):
-            data[udtm.field_name].append(udtm.lov)
-        else:
-            data[udtm.field_name] = [udtm.lov]
-    return data
 
 
 def los_round(num, d_places):

@@ -1,7 +1,7 @@
 from sqlalchemy import VARCHAR, Column
 from sqlalchemy.dialects.oracle import NUMBER
 
-from app.third_party.oracle.models.utils import Base, BaseModel
+from database import Base, BaseModel
 
 
 class CollTran(BaseModel):

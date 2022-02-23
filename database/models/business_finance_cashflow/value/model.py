@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Float, Integer
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class BusinessFinanceCashFlowValue(BaseModel):

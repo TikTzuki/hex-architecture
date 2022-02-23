@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class PolicyRule(BaseModel):

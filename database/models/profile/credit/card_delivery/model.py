@@ -1,6 +1,6 @@
 from sqlalchemy import VARCHAR, Column, Integer
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class ProfileCreditCardDelivery(BaseModel):

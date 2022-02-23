@@ -1,12 +1,11 @@
 import logging
 import os
 import sys
-from typing import List, Dict
+from typing import Dict, List
 
 import cx_Oracle
-import sqlacodegen
 from loguru import logger
-from pydantic import Field, BaseSettings
+from pydantic import BaseSettings, Field
 
 from project.settings.logging_config import InterceptHandler
 
@@ -69,7 +68,7 @@ class RedisSettings(BaseSettings):
 
 class ServiceSettings(BaseSettings):
     class Location(BaseSettings):
-        url: str = Field(f"http://superapp.minerva.vn:9213/")
+        url: str = Field("http://superapp.minerva.vn:9213/")
         header: Dict = Field({
             "Connection": "keep-alive",
             "MNV-encode": "0",
@@ -86,9 +85,9 @@ class ServiceSettings(BaseSettings):
         port: int = Field(636, env="LDAP_PORT")
 
     class DBS(BaseSettings):
-        host: str = Field(f"http://192.168.73.135:9004", env="DBS_SERVICE_HOST")
+        host: str = Field("http://192.168.73.135:9004", env="DBS_SERVICE_HOST")
         datetime_format: str = Field("%d/%m/%Y %H:%M:%S")
-        server_auth: str = Field(f"2L0YHOzA4NqqavbYyAwQ7k0cz0X1BbPF", env="DBS_SERVICE_AUTH")
+        server_auth: str = Field("2L0YHOzA4NqqavbYyAwQ7k0cz0X1BbPF", env="DBS_SERVICE_AUTH")
         authorization: str = Field("bearer 1")
 
     class File(BaseSettings):
@@ -113,8 +112,8 @@ class ServiceSettings(BaseSettings):
         ])
 
     class Template(BaseSettings):
-        host: str = Field(f"http://192.168.73.135:9002", env="TEMPLATE_SERVICE_HOST")
-        server_auth = Field(f"Zji3TMBsgtDKNzuFefi1So6Xr1YPzgXp", env="TEMPLATE_SERVICE_AUTH")
+        host: str = Field("http://192.168.73.135:9002", env="TEMPLATE_SERVICE_HOST")
+        server_auth = Field("Zji3TMBsgtDKNzuFefi1So6Xr1YPzgXp", env="TEMPLATE_SERVICE_AUTH")
 
     location = Location()
     ldap = LDAP()

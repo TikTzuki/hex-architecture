@@ -1,7 +1,5 @@
 from enum import Enum
 
-from app.api.v1.controllers.card_loan.loan_info.func_cal_card_limit import CalculationCardLimit
-
 TYPE_CALCULATION = 'CALCULATION'  # Loại tính toán
 TYPE_CONDITION_REF_OBJ = 'CONDITION_REF_OBJ'  # Loại điều kiện có quan hệ
 TYPE_CONDITION_NOT_REF_OBJ = 'CONDITION_NOT_REF_OBJ'  # Loại điều kiện không có quan hệ
@@ -79,18 +77,3 @@ FIELD_TYPE_UNIT_LIMIT = 'UNIT_LIMIT'  # Hạn mức tổng đơn vị đề xu�
 class ETypeField(str, Enum):  # Phân biệt field item: Hạn mức tối đa theo đối tượng, Hạn mức tổng đơn vị đề, ...
     id_object_limit = FIELD_TYPE_OBJECT_LIMIT
     id_unit_limit = FIELD_TYPE_UNIT_LIMIT
-
-
-# Func tính toán hạn mức thẻ
-func_cal = CalculationCardLimit()
-func_cal_switcher = {
-    ECalculationType.id_calculation: func_cal.formula_calculation,
-    ECalculationType.id_calculation_total_child: func_cal.formula_calculation_total_child,
-    ECalculationType.id_condition_ref_obj: func_cal.formula_condition_ref_obj,
-    ECalculationType.id_condition_not_ref_obj: func_cal.formula_condition_not_ref_obj,
-    ECalculationType.id_clone_data: func_cal.formula_clone_data,
-    ECalculationType.id_condition_depends_value: func_cal.formula_condition_depends_value,
-    ECalculationType.id_condition_ref_obj_input_value: func_cal.formula_con_ref_obj_input_value,
-    ECalculationType.id_calculation_condition: func_cal.formula_calculation_conidtion
-
-}

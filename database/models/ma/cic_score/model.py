@@ -1,6 +1,6 @@
 from sqlalchemy import VARCHAR, Column, Date, Integer
 
-from app.third_party.oracle.models.utils import Base
+from database import Base
 
 
 class MaCicScore(Base):

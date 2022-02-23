@@ -1,7 +1,7 @@
 from sqlalchemy import VARCHAR, Column, DateTime, Float
 from sqlalchemy.dialects.oracle import NUMBER
 
-from database.models.utils import BaseModel
+from database.base import BaseModel
 
 
 class CollPriceCert(BaseModel):

@@ -1,10 +1,8 @@
 from datetime import datetime
 
 from loguru import logger
-from sqlalchemy import VARCHAR, Column, DateTime, String, func
-from sqlalchemy import create_engine
-from sqlalchemy.orm import as_declarative, declared_attr
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy import VARCHAR, Column, DateTime, String, create_engine, func
+from sqlalchemy.orm import Session, as_declarative, declared_attr, sessionmaker
 from sqlalchemy.pool import NullPool
 
 from project.settings.configs import DATABASES
@@ -39,7 +37,7 @@ class Base:
 
 
 @as_declarative()
-class BaseUtils:
+class BaseModel:
     __name__: str
 
     @declared_attr

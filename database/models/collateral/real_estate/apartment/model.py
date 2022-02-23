@@ -1,7 +1,7 @@
 from sqlalchemy import VARCHAR, Column, DateTime, Float, Integer
 from sqlalchemy.dialects.oracle import NUMBER
 
-from app.third_party.oracle.models.utils import JSONSQL, BaseModel
+from database import JSONSQL, BaseModel
 
 
 class CollReApart(BaseModel):

@@ -1,14 +1,11 @@
-import cx_Oracle
 import uvicorn
 from fastapi import FastAPI, Request, status
-from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import ORJSONResponse
 from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import JSONResponse
 
-from project.core.exception import LOSException
 from project import router
+from project.core.exception import LOSException
 from project.settings.configs import APPLICATION
 from project.settings.middleware import middleware_setting
 
@@ -38,7 +35,7 @@ async def time_header(request: Request, call_next):
 
 @app.exception_handler(LOSException)
 async def los_http_exception_handler(request: Request, exc: LOSException):
-    return JSONResponse(
+    return ORJSONResponse(
         content={
             "errors": exc.get_detail(),
         },
@@ -49,7 +46,7 @@ async def los_http_exception_handler(request: Request, exc: LOSException):
 
 @app.exception_handler(RequestValidationError)
 async def except_custom(request: Request, exc: RequestValidationError):  # noqa
-    return JSONResponse(
+    return ORJSONResponse(
         content={
             "errors": LOSException.errors_pipeline(exc.errors())
         },
@@ -58,4 +55,4 @@ async def except_custom(request: Request, exc: RequestValidationError):  # noqa
 
 
 if __name__ == "__main__":
-    uvicorn.run('main:app', host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run('main:app', host="127.0.0.1", port=8000, reload=True, env_file=".env")

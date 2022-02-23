@@ -14,8 +14,7 @@ class ProductDocumentRule(BaseModel):
     document_group_type = Column('DOCUMENT_GROUP_TYPE', VARCHAR(75),
                                  comment='Nhóm tài liệu cần phải có (tham chiếu trong bảng udtm )')
 
-    document_type_id = Column('DOCUMENT_TYPE_ID', Integer,
-                              comment='Chỉ định tài liệu cụ thể phải có trong hồ sơ, cho phép null, nếu giá trị là null thì chỉ cần có 1 tài liệu trong nhóm là được')  # noqa
+    document_type_id = Column('DOCUMENT_TYPE_ID', Integer, comment='Chỉ định tài liệu cụ thể phải có trong hồ sơ, cho phép null, nếu giá trị là null thì chỉ cần có 1 tài liệu trong nhóm là được')
 
     required_flag = Column('REQUIRED_FLAG', VARCHAR(2), comment='Chỉ định bắt buộc phải có hoặc không')
 

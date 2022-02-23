@@ -43,8 +43,7 @@ class FinanceMetadata(BaseModel):
 
 class FinanceMetadataGroup(BaseModel):
     __tablename__ = 'los_finance_metadata_group'
-    __table_args__ = {
-        'comment': 'Nhóm Metadata ghi Các mục doanh thu: \\n+ Bảng kết quả hoạt động kinh doanh \\n+ Bảng cân đối tài sản nguồn vốn\\n+ Bảng xây dựng HMCTD bổ sung vốn lưu động'}  # noqa
+    __table_args__ = {'comment': 'Nhóm Metadata ghi Các mục doanh thu: \\n+ Bảng kết quả hoạt động kinh doanh \\n+ Bảng cân đối tài sản nguồn vốn\\n+ Bảng xây dựng HMCTD bổ sung vốn lưu động'}
 
     id = Column("ID", Integer, primary_key=True)
 

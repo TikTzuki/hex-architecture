@@ -15,12 +15,8 @@ class InterceptHandler(logging.Handler):
 
         # Find caller from where originated the logged message
         frame, depth = logging.currentframe(), 2
-        while frame.f_code.co_filename == logging.__file__:  # noqa: WPS609
+        while frame.f_code.co_filename == logging.__file__:
             frame = cast(FrameType, frame.f_back)
             depth += 1
-        mess = str(record)
-        try:
-            mess = record.getMessage()
-        except:  # noqa
-            pass
+        mess = record.getMessage()
         logger.opt(depth=depth, exception=record.exc_info).log(level, mess)

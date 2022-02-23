@@ -29,8 +29,7 @@ class PersonBusinessFinanceReport(BaseModel):
 
     summary = Column("SUMMARY", VARCHAR(500), comment='Nhận xét tổng quan')
 
-    able_pay_type = Column("ABLE_PAY_TYPE", CHAR(3),
-                           comment='Xác nhận đã thẩm định thành công và đủ khả năng về thanh toán chi phí sinh hoạt khác. hoặc khong đủ khả năng thành toán....')  # noqa
+    able_pay_type = Column("ABLE_PAY_TYPE", CHAR(3), comment='Xác nhận đã thẩm định thành công và đủ khả năng về thanh toán chi phí sinh hoạt khác. hoặc khong đủ khả năng thành toán....')
 
     able_capital_requirement = Column("ABLE_CAPITAL_REQUIREMENT", VARCHAR(100),
                                       comment='Đánh giá  về phương án và nhu cầu vay vốn')

@@ -32,7 +32,7 @@ class Base:
         super().__init__(**kwargs)
 
     @declared_attr
-    def __tablename__(cls) -> str:  # noqa
+    def __tablename__(cls) -> str:
         return cls.__name__.lower()
 
 
@@ -41,7 +41,7 @@ class BaseModel:
     __name__: str
 
     @declared_attr
-    def __tablename__(cls) -> str:  # noqa
+    def __tablename__(cls) -> str:
         return cls.__name__.lower()
 
     def __init__(self, **kwargs):

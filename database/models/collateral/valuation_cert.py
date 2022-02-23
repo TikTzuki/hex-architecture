@@ -1,4 +1,6 @@
-from sqlalchemy import VARCHAR, Column, DateTime, Float
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.oracle import NUMBER
 
 from database.base import BaseModel
@@ -9,7 +11,7 @@ class CollPriceCert(BaseModel):
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin chứng thư thẩm định giá của tài sản.'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    collateral_id = Column(NUMBER(asdecimal=False), comment='Mã hồ sơ tài sản bảo đảm, tham chiếu qua bảng LOS_COLLATERAL')
+    collateral_id = Column(ForeignKey('v_los_collateral.id'), comment='Mã hồ sơ tài sản bảo đảm, tham chiếu qua bảng LOS_COLLATERAL')
     asset_block_flag = Column(VARCHAR(1), comment='Tài sản có hợp khối không (chỉ dành cho ts, bất động sản). Dữ liệu dạng Có / Không')
     re_status = Column(VARCHAR(50), comment='Trạng thái BĐS (chỉ dành cho bất động sản)')
     report_code = Column(VARCHAR(100), comment='Mã báo cáo / Chứng thư thảm định giá')
@@ -34,13 +36,15 @@ class CollPriceCert(BaseModel):
 
     collateral_type_id = Column(VARCHAR(50), comment='Loại tài sản bảo đảm cấp 1')
 
+    collateral = relationship('VLosCollateral')
+
 
 class CollRe(BaseModel):
     __tablename__ = 'v_los_coll_re'
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin chứng thư thẩm định giá của tài sản.'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    price_cert_id = Column(NUMBER(asdecimal=False), comment='Mã hồ sơ chứng thư định giá')
+    price_cert_id = Column(ForeignKey('v_los_coll_price_cert.id'), comment='Mã hồ sơ chứng thư định giá')
     address = Column(VARCHAR(200), comment='Địa chỉ thực tế')
     province_id = Column(VARCHAR(50), comment='Tỉnh/TP')
     district_id = Column(VARCHAR(50), comment='Quận/Huyện')
@@ -51,13 +55,15 @@ class CollRe(BaseModel):
     description = Column(VARCHAR(300), comment='Tình / TP Thẩm định (dùng cho tài sản không phải BĐS)')
     order_display = Column(NUMBER(asdecimal=False), comment='Thứ tự sắp xếp hiển thị')
 
+    price_cert = relationship('VLosCollPriceCert')
+
 
 class CollPriceCertAsset(BaseModel):
     __tablename__ = 'v_los_coll_price_cert_asset'
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin các tài sản được định giá trong chứng thư. Lưu trữ mã tài sản bảo đảm'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    price_cert_id = Column(NUMBER(asdecimal=False), comment='Mã hồ sơ chứng thư định giá')
+    price_cert_id = Column(ForeignKey('v_los_coll_price_cert.id'), comment='Mã hồ sơ chứng thư định giá')
     collateral_type_id = Column(VARCHAR(50),
                                 comment='Mã loại tài sản cấp 2 của BDS,Phương tiện máy móc, Mã cấp 1 của các loại tài sản khác\n'
                                         '- Bất động sản:\n'
@@ -71,13 +77,15 @@ class CollPriceCertAsset(BaseModel):
     total_asset_value = Column(Float, comment='Tổng số tiền định giá theo tài sản')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
+    price_cert = relationship('VLosCollPriceCert')
+
 
 class CollPriceCertAssetAppraisal(BaseModel):
     __tablename__ = 'v_los_coll_price_cert_asset_appraisal'
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin về thông tin định giá và thẩm định tài sản - Mục A'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    price_cert_asset_id = Column(NUMBER(asdecimal=False), comment='Mã tài sản chi tiết trong bảng lưu trữ thông tin các tài sản bảo đảm (Bảng LOS_COLL_PRICE_CERT_ASSET)')
+    price_cert_asset_id = Column(ForeignKey('v_los_coll_price_cert_asset.id'), comment='Mã tài sản chi tiết trong bảng lưu trữ thông tin các tài sản bảo đảm (Bảng LOS_COLL_PRICE_CERT_ASSET)')
     asset_credit_flag = Column(VARCHAR(1))
     source_income_asset_flag = Column(VARCHAR(1), comment='Nguồn trả tiền nợ là nguôn tiền hình thành từ việc kinh doanh, khai thác chính TSBD')
     asset_used_loan_flag = Column(VARCHAR(1), comment='TS đang đảm bảo cho nghĩa vụ CTD')
@@ -85,3 +93,5 @@ class CollPriceCertAssetAppraisal(BaseModel):
     amount_loan_ratio = Column(Float, comment='Tỷ lệ cho vay tối đa theo quy định.')
     amount_value = Column(Float, comment='Giá trị QSD đất theo từng GCN (VNĐ)')
     description = Column(VARCHAR(200), comment='Thông tin nghĩa vụ bảo đảm')
+
+    price_cert_asset = relationship('VLosCollPriceCertAsset')

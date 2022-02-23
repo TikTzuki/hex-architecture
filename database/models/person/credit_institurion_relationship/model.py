@@ -1,4 +1,6 @@
-from sqlalchemy import CHAR, Column, DateTime, Float, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.oracle import VARCHAR2
 
 from database.base import BaseModel
@@ -6,22 +8,17 @@ from database.base import BaseModel
 
 class PersonCreditInstitutionRelationship(BaseModel):
     __tablename__ = 'los_per_credit_insti_rel'
+    __table_args__ = {'comment': 'Mối quan hệ của khách hàng với các tổ chức tín dụng - ghi nhạn theo CIC'}
 
-    id = Column("ID", Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    personal_identity_id = Column(ForeignKey('los_person_identity.id'), comment='CIC theo từng CCCD, CMND, HSVV')
+    credit_institution_id = Column(ForeignKey('los_credit_institution.id'), comment='Tổ chức tín dụng liên đới')
+    los_id = Column(CHAR(20), comment='Mã hồ sơ vay vốn,')
+    loan_amount = Column(Float, comment='Tổng số tiền nợ')
+    collateral_amount = Column(Float, comment='Tổng giá trị tài sản đảm bảo')
+    debt_classification = Column(VARCHAR(20), comment='Nhóm nợ cao nhất')
+    search_date = Column(DateTime, comment='Ngày tra cứu')
+    total_cir = Column(Integer, comment='Tổng số khoản nợ trong một tổ chức')
 
-    personal_identity_id = Column('PERSONAL_IDENTITY_ID', Integer)
-
-    credit_institution_id = Column('CREDIT_INSTITUTION_ID', Integer,
-                                   comment='Mối quan hệ của khách hàng với các tổ chức tín dụng - ghi nhạn theo CIC')
-
-    los_id = Column('LOS_ID', CHAR(20))
-
-    loan_amount = Column("LOAN_AMOUNT", Float, comment='Tổng số tiền nợ')
-
-    collateral_amount = Column("COLLATERAL_AMOUNT", Float, comment='Tổng giá trị tài sản đảm bảo')
-
-    debt_classification = Column("DEBT_CLASSIFICATION", VARCHAR2(20), comment='Nhóm nợ cao nhất')
-
-    search_date = Column("SEARCH_DATE", DateTime, comment='Ngày tra cứu')
-
-    total_cir = Column("TOTAL_CIR", Integer, comment='Tổng số khoản nợ trong một tổ chức')
+    credit_institution = relationship('LosCreditInstitution')
+    personal_identity = relationship('LosPersonIdentity')

@@ -1,4 +1,6 @@
-from sqlalchemy import VARCHAR, Column, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
 
@@ -7,27 +9,21 @@ class FinanceTimeline(BaseModel):
     __tablename__ = 'los_finance_timeline'
     __table_args__ = {'comment': 'Dữ liệu thời gian T-2, T-1, T, T+1, T+2'}
 
-    id = Column("ID", Integer, primary_key=True)
-
-    name = Column("NAME", VARCHAR(100))
-
-    description = Column("DESCRIPTION", VARCHAR(200))
-
-    display_order = Column("DISPLAY_ORDER", Integer)
+    id = Column(Integer, primary_key=True)
+    name = Column(VARCHAR(100))
+    description = Column(VARCHAR(200))
+    display_order = Column(Integer)
 
 
 class FinanceTimelineAssign(BaseModel):
     __tablename__ = 'los_finance_timeline_assign'
-    __table_args__ = {
-        'comment': 'Phân định thời gian theo thời gian T, \\nCó 2 dạng :\\n+ Khách hàng đưa dữ liệu, (mặc định)\\n+ NV SCB Tự tính dữ liệu,'}
+    __table_args__ = {'comment': 'Phân định thời gian theo thời gian T, \\nCó 2 dạng :\\n+ Khách hàng đưa dữ liệu, (mặc định)\\n+ NV SCB Tự tính dữ liệu,'}
 
-    id = Column("ID", Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    time_line_id = Column(ForeignKey('los_finance_timeline.id'), comment='Mã thời gian T-2, T-1, T....')
+    owner_input_type = Column(VARCHAR(20), comment='Quy định Timeline đó sẽ có ai nhập dữ liệu (SCB, Khách hàng) (tham chiếu trong bảng udtm )')
+    display_order = Column(Integer)
 
-    time_line_id = Column('TIME_LINE_ID', Integer)
+    required_flag = Column(VARCHAR(1), comment='Yêu cầu dữ liệu truyền lên')
 
-    owner_input_type = Column("OWNER_INPUT_TYPE", VARCHAR(20),
-                              comment='Quy định Timeline đó sẽ có ai nhập dữ liệu (SCB, Khách hàng) (tham chiếu trong bảng udtm )')
-
-    display_order = Column("DISPLAY_ORDER", Integer)
-
-    required_flag = Column('REQUIRED_FLAG', VARCHAR(1), comment='Yêu cầu truyền dữ liệu')
+    time_line = relationship('LosFinanceTimeline')

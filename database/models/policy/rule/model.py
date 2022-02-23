@@ -1,4 +1,6 @@
-from sqlalchemy import Column, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
 
@@ -6,10 +8,7 @@ from database.base import BaseModel
 class PolicyRule(BaseModel):
     __tablename__ = 'los_policy_rule'
 
-    id = Column("ID", Integer, primary_key=True)
-
-    policy_id = Column('POLICY_ID', Integer)
-
-    policy_group_id = Column('POLICY_GROUP_ID', Integer)
-
-    display_order = Column("DISPLAY_ORDER", Integer)
+    id = Column(Integer, primary_key=True)
+    policy_id = Column(Integer)
+    policy_group_id = Column(Integer)
+    display_order = Column(Integer)

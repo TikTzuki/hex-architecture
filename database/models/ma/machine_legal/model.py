@@ -1,4 +1,6 @@
-from sqlalchemy import VARCHAR, Column, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 
 from database import Base
 
@@ -10,6 +12,6 @@ class MaCollMachineLegal(Base):
     id = Column(VARCHAR(20), primary_key=True)
     name = Column(VARCHAR(100))
     parent_id = Column(VARCHAR(100))
-    LEVEL = Column(Integer)
+    LEVEL = Column(VARCHAR(100))
     display_order = Column(Integer)
     other_value_flag = Column(VARCHAR(2), comment='Giá trị khác, khi chọn vào thì chuyển qua nhập tay')

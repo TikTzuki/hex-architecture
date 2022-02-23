@@ -1,4 +1,6 @@
-from sqlalchemy import VARCHAR, Column, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 
 from database import Base
 
@@ -7,32 +9,13 @@ class MaCollType(Base):
     __tablename__ = 'los_ma_coll_type'
     __table_args__ = {'comment': 'Danh mục tài sản bảo đảm'}
 
-    id = Column("ID", VARCHAR(20), primary_key=True)
-
-    name = Column("NAME", VARCHAR(100))
-
-    parent_id = Column("PARENT_ID", VARCHAR(10))
-
-    lev = Column('LEV', Integer, comment='Thứ tự sắp cha con dùng nhanh khi search')
-
-    display_order = Column("DISPLAY_ORDER", Integer, comment='Thứ tự hiển thị')
-
-    # other_value_flag = Column("OTHER_VALUE_FLAG", VARCHAR(1), comment='Giá trị khác, khi chọn vào thì chuyển qua nhập tay')
+    id = Column(VARCHAR(10), primary_key=True)
+    name = Column(VARCHAR(100))
+    parent_id = Column(VARCHAR(10))
+    lev = Column(Integer, comment='Thứ tự sắp cha con dùng nhanh khi search')
+    display_order = Column(Integer, comment='Thứ tự hiển thị')
 
 
-#
-# class LosMaCollMachineLegal(Base):
-#     __tablename__ = 'los_ma_coll_machine_legal'
-#     __table_args__ = {"comment": 'Danh mục hồ sơ pháp lý của TSBD là Thiết bị máy móc'}
-#
-#     id = Column('id', VARCHAR(20))
-#     name = Column('name', VARCHAR(100))
-#     parent_id = Column('parent_id', VARCHAR(100))
-#     level = Column('LEVEL', VARCHAR(100))
-#     display_order = Column('display_order', Integer)
-#     other_value_flag = Column('other_value_flag', VARCHAR(2), comment='Giá trị khác, khi chọn vào thì chuyển qua nhập tay')
-#
-#
 class LosMaCollTransType(Base):
     __tablename__ = 'los_ma_coll_trans_type'
     __table_args__ = {"comment": 'Danh sách các phương tiện phận tải chi tiết dùng cho mục định giá'}

@@ -1,4 +1,6 @@
-from sqlalchemy import VARCHAR, Column, DateTime, Float, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.oracle import NUMBER
 
 from database import JSONSQL, BaseModel
@@ -9,9 +11,11 @@ class CollReApart(BaseModel):
     __table_args__ = {'comment': 'Bảng thông tin lưu trữ tài sản là Căn hộ chung cư, thông tin định giá và thẩm định tài sản'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    price_cert_asset_appraisal_id = Column(NUMBER(asdecimal=False), comment='Mã tài sản bảo đảm tham chiếu qua bảng LOS_COLL_PRICE_CERT_ASSET_APPRAISAL')
+    price_cert_asset_appraisal_id = Column(ForeignKey('v_los_coll_price_cert_asset_appraisal.id'), comment='Mã tài sản bảo đảm tham chiếu qua bảng LOS_COLL_PRICE_CERT_ASSET_APPRAISAL')
     legal_status = Column(VARCHAR(50), comment='Tình trạng pháp lý ')
     apartment_name = Column(VARCHAR(200), comment='Tên chung cư dự án')
+
+    price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
 
 
 class CollReApartRoom(BaseModel):
@@ -19,7 +23,7 @@ class CollReApartRoom(BaseModel):
     __table_args__ = {'comment': 'Thông tin về căn hộ trong chung cư, có thể nhập nhiều căn'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    re_apart_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu vào bảng RE_APART để biêt chung cư nào')
+    re_apart_id = Column(ForeignKey('v_los_coll_re_apart.id'), comment='Tham chiếu vào bảng RE_APART để biêt chung cư nào')
     apart_type_id = Column(VARCHAR(200), comment='Loại nhà ở')
     room_type_id = Column(VARCHAR(50), comment='Loại căn hộ')
     room_type_other = Column(VARCHAR(200), comment='Loại căn hộ khác')
@@ -33,13 +37,15 @@ class CollReApartRoom(BaseModel):
     duration_cert = Column(VARCHAR(200), comment='Thời hạn sở hữu theo GCN')
     components = Column(VARCHAR(200), comment='Hạng mục được sở hữu chung ngoài căn hộ theo GCN')
 
+    re_apart = relationship('VLosCollReApart')
+
 
 class CollReApartLand(BaseModel):
     __tablename__ = 'v_los_coll_re_apart_land'
     __table_args__ = {'comment': 'Bảng thông tin về đất của Căn hộ chung cư'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    re_apart_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng LOS_COLL_RE_APART để biết căn hộ chung cư nào ')
+    re_apart_id = Column(ForeignKey('v_los_coll_re_apart.id'), comment='Tham chiếu qua bảng LOS_COLL_RE_APART để biết căn hộ chung cư nào ')
     address = Column(VARCHAR(200), comment='Địa chỉ thực tế thửa đất')
     province_id = Column(VARCHAR(50), comment='Tình / TP')
     district_id = Column("distinct_id", VARCHAR(50), comment='Quận / Huyện')
@@ -51,13 +57,15 @@ class CollReApartLand(BaseModel):
     purpose_land_id = Column(JSONSQL(50), comment='Mục đích sử dụng đất ( theo thẩm định giá)')
     purpose_land_other = Column(VARCHAR(200), comment='Mục đích sử dụng đất ( theo thẩm định giá) khác')
 
+    re_apart = relationship('VLosCollReApart')
+
 
 class CollReApartLandUsed(BaseModel):
     __tablename__ = 'v_los_coll_re_apart_land_used'
     __table_args__ = {'comment': 'Bảng thông tin về mục đích sử dụng đất của căn hộ chung cư'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    re_apart_land_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu vào bảng LOS_COLL_RE_APART_LAND, để mục đích của Đất nào')
+    re_apart_land_id = Column(ForeignKey('v_los_coll_re_apart_land.id'), comment='Tham chiếu vào bảng LOS_COLL_RE_APART_LAND, để mục đích của Đất nào')
     purpose_cert = Column(VARCHAR(200), comment='Mục đích sử dụng theo GCN')
     land_number = Column(NUMBER(asdecimal=False), comment='Số thửa đất')
     map_number = Column(NUMBER(asdecimal=False), comment='Tờ bản đồ số')
@@ -70,27 +78,33 @@ class CollReApartLandUsed(BaseModel):
     method_used_other = Column(VARCHAR(200), comment='Hình thức sử dụng đất theo GCN Khác')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
+    re_apart_land = relationship('VLosCollReApartLand')
+
 
 class CollReApartOwner(BaseModel):
     __tablename__ = 'v_los_coll_re_apart_owner'
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin chủ sở hữu căn hộ chung cư'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    re_apart_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng TSBD Căn hộ chung cư (LOS_COLL_RE_APART)')
+    re_apart_id = Column(ForeignKey('v_los_coll_re_apart.id'), comment='Tham chiếu qua bảng TSBD Căn hộ chung cư (LOS_COLL_RE_APART)')
     person_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng Person để lấy đúng ID')
     owner_type_id = Column(VARCHAR(50), comment='Loại hình sở hữu (Chính chủ, Đồng sở hữu….)')
     owner_auth_flag = Column(VARCHAR(1), comment='Có uỷ quyền cho người khác không Y/N')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
+
+    re_apart = relationship('VLosCollReApart')
 
 
 class CollReApartOwnerCert(BaseModel):
     __tablename__ = 'v_los_coll_re_apart_owner_cert'
     __table_args__ = {'comment': 'Bảng lưu trữ danh sách các giấy chứng nhận theo 1 căn hộ chung cư'}
 
-    id = Column('id', Integer, primary_key=True)
-    re_apart_id = Column('re_apart_id', Integer, comment='Tham chiếu qua bảng LOS_COLL_RE_APART để biết căn hộ chung cư nào')
-    display_order = Column('display_order', Integer)
-    actived_flag = Column('actived_flag', VARCHAR(2))
+    id = Column(Integer, primary_key=True)
+    re_apart_id = Column(ForeignKey('v_los_coll_re_apart.id'), comment='Tham chiếu qua bảng LOS_COLL_RE_APART để biết căn hộ chung cư nào')
+    display_order = Column(Integer)
+    actived_flag = Column(VARCHAR(2))
+
+    re_apart = relationship('VLosCollReApart')
 
 
 class CollReApartOwnerCertItem(BaseModel):
@@ -98,7 +112,7 @@ class CollReApartOwnerCertItem(BaseModel):
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin hồ sơ Giấy CN Sở hữu căn hộ chung cư'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    re_apart_owner_cert_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng RE_APART_OWNER_CERT để có thể có chi tiết của giấy chứng nhận nào')
+    re_apart_owner_cert_id = Column(ForeignKey('v_los_coll_re_apart_owner_cert.id'), comment='Tham chiếu qua bảng RE_APART_OWNER_CERT để có thể có chi tiết của giấy chứng nhận nào')
     person_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng Person để lấy đúng ID, người được xác nhận là sở hữu CTXD')
     land_owner_cert_type_id = Column(VARCHAR(50), comment='Loại giấy chứng nhận quyền sử dụng đất')
     land_owner_cert_other = Column(VARCHAR(200), comment='Loại giấy chứng nhận quyền sử dụng đất khác')
@@ -111,15 +125,19 @@ class CollReApartOwnerCertItem(BaseModel):
     contract_date = Column(DateTime, comment='Ngày hợp đồng')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
+    re_apart_owner_cert = relationship('VLosCollReApartOwnerCert')
+
 
 class CollReApartOwnerAuth(BaseModel):
     __tablename__ = 'v_los_coll_re_apart_owner_auth'
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin về việc uỷ quyền của chủ sở hữu căn hộ chung cư'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    re_apart_owner_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng LOS_COLL_RE_APART_OWNER để biết ai là người uỷ quyền')
+    re_apart_owner_id = Column(ForeignKey('v_los_coll_re_apart_owner.id'), comment='Tham chiếu qua bảng LOS_COLL_RE_APART_OWNER để biết ai là người uỷ quyền')
     person_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng Person để lấy đúng ID, người được nhận uỷ quyền')
     rel_auth_owner = Column(VARCHAR(200), comment='Môi quan hệ của người được uỷ quyền với chủ tài sản')
     rel_auth_borrower = Column(VARCHAR(200), comment='Mỗi quan hệ của người được uỷ quyền với chính đối tượng vay, Lưu ý có thể chính người đi vay là người được uỷ quyền ')
     contract_authorized = Column(VARCHAR(200), comment='Hợp đồng uỷ quyền ')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
+
+    re_apart_owner = relationship('VLosCollReApartOwner')

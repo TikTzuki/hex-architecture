@@ -1,4 +1,6 @@
-from sqlalchemy import CHAR, VARCHAR, Column, Float, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.oracle import VARCHAR2
 
 from database.base import BaseModel
@@ -6,39 +8,30 @@ from database.base import BaseModel
 
 class CreditInstitution(BaseModel):
     __tablename__ = 'los_credit_institution'
-    __table_args__ = {'comment': 'Nhóm nợ có tài sản đảm bảo'}
+    __table_args__ = {'comment': 'Danh sách các tổ chức tín dụng'}
 
-    id = Column("ID", Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(VARCHAR(100))
+    code = Column(VARCHAR(9))
+    institution_group = Column(VARCHAR(20), comment='Nhóm TCTD như ngân hàng, tổ chức tài chính')
+    avatar = Column(VARCHAR(100))
 
-    name = Column("NAME", VARCHAR(100))
-
-    code = Column("CODE", VARCHAR(9))
-
-    institution_group = Column("INSTITUTION_GROUP", VARCHAR(20), comment='Nhóm TCTD')
-
-    avatar = Column("AVATAR", VARCHAR(100))
-
-    short_name = Column("SHORT_NAME", VARCHAR(50))
-
-    other_value_flag = Column("OTHER_VALUE_FLAG", VARCHAR2(1), comment='Cờ kiểm tra có giá trị "khác"')
+    short_name = Column(VARCHAR(50), comment='Tên viết tắt của một số ngân hàng ví dụ ACB, Agribank, MB')
+    other_value_flag = Column(VARCHAR(1), server_default=text("'N'"))
 
 
 class CreditInstitutionLoan(BaseModel):
     __tablename__ = 'los_credit_institution_loan'
     __table_args__ = {'comment': 'Khai báo khoản vay thông thường trong một tổ chức'}
-    id = Column("ID", Integer, primary_key=True)
 
-    personal_cir_id = Column('PERSONAL_CIR_ID', Integer)
+    id = Column(Integer, primary_key=True)
+    personal_cir_id = Column(ForeignKey('los_per_credit_insti_rel.id'))
+    property_credit = Column(VARCHAR(20), comment='Phương thức cấp tín dụng: Ngắn hạn, Trung hạn, Dài hạn')
+    credit_term = Column(Integer, comment='Thời hạn cấp tín dụng')
+    debt = Column(Float, comment='Số dư nợ')
+    debt_classification = Column(VARCHAR(20), comment='Nhóm nợ')
+    actived_flag = Column(CHAR(1), comment='Tình trạng của khoản nợ.')
 
-    property_credit = Column("PROPERTY_CREDIT", VARCHAR(20),
-                             comment='Phương thức cấp tín dụng: Ngắn hạn, Trung hạn, Dài hạn')
+    credit_limit = Column(Float)
 
-    credit_term = Column("CREDIT_TERM", Integer, comment='Thời hạn cấp tín dụng')
-
-    credit_limit = Column("CREDIT_LIMIT", Float, comment='Giới hạn tín dụng')
-
-    debt = Column("DEBT", Float, comment='Số dư nợ')
-
-    debt_classification = Column("DEBT_CLASSIFICATION", VARCHAR2(20), comment='Nhóm nợ')
-
-    actived_flag = Column("ACTIVED_FLAG", CHAR(1), comment='Tình trạng của khoản nợ.')
+    personal_cir = relationship('LosPerCreditInstiRel')

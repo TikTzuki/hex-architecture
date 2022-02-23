@@ -1,7 +1,10 @@
-from sqlalchemy import VARCHAR, Column
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.oracle import NUMBER
 
 from database import Base, BaseModel
+
 
 
 class CollTran(BaseModel):
@@ -9,10 +12,10 @@ class CollTran(BaseModel):
     __table_args__ = {'comment': 'Bảng lưu thông tin tài sản là PTVT Đường bộ.'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    price_cert_asset_appraisal_id = Column(NUMBER(asdecimal=False), comment='Mã tài sản bảo đảm tham chiếu qua bảng LOS_COLL_PRICE_CERT_ASSET_APPRAISAL')
+    price_cert_asset_appraisal_id = Column(ForeignKey('v_los_coll_price_cert_asset_appraisal.id'), comment='Mã tài sản bảo đảm tham chiếu qua bảng LOS_COLL_PRICE_CERT_ASSET_APPRAISAL')
     person_id = Column(NUMBER(asdecimal=False))
-    trans_type = Column("trans_name", VARCHAR(50), comment='Loại phương tiện ')
-    trans_type_other = Column("trans_name_other", VARCHAR(100), comment='Chi tiết loại phương tiện khác')
+    trans_name = Column(VARCHAR(50), comment='Loại phương tiện (Nhập luôn value Oto con, ô tô khách,.... không nhập ID) Tham chiếu vào cột TRAN_NAME bên LOS_MA_COLL_TRANS_TYPE')
+    trans_name_other = Column(VARCHAR(100), comment='Chi tiết loại phương tiện khác')
     trans_brand = Column("trans_brand_id", VARCHAR(50), comment='Nhãn hiệu')
     trans_brand_other = Column(VARCHAR(100), comment='Nhãn hiệu khác')
     model = Column(VARCHAR(50), comment='Model (số loại)')
@@ -27,13 +30,17 @@ class CollTran(BaseModel):
     description = Column(VARCHAR(100), comment='Mô tả tài sản')
     quality_rest_ratio = Column(VARCHAR(50), comment='Tỷ lệ chất lượng còn lại của tài sản ')
 
+    price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
+
+
+
 
 class CollTransLegalDocument(BaseModel):
     __tablename__ = 'v_los_coll_trans_legal_document'
     __table_args__ = {'comment': 'Bảng lưu trữ thông tin về danh mục hồ sơ pháp lý của PTVT'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    trans_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng LOS_COLL_TRANS')
+    trans_id = Column(ForeignKey('v_los_coll_trans.id'), comment='Tham chiếu qua bảng LOS_COLL_TRANS')
     trans_legal_doc_type_id = Column(VARCHAR(50),
                                      comment='Loại hồ sơ pháp lý\n'
                                              '- Giấy chứng nhận\n'
@@ -46,6 +53,7 @@ class CollTransLegalDocument(BaseModel):
                                        '- Tờ khai hải quan, tờ khai nguồn gốc, tờ khai khác\n'
                                        '- Hợp đồng thương mại, hợp đồng mua bán, hoá đơn (invoice), Khác….\n'
                                        '- Hoá đơn tài chính, Khác….')
+    trans = relationship('VLosCollTran')
 
 
 class CollTransOwner(BaseModel):
@@ -53,19 +61,11 @@ class CollTransOwner(BaseModel):
     __table_args__ = {'comment': 'Thông tin pháp lý chủ sở hữu'}
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
-    trans_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng LOS_COLL_TRANS')
+    trans_id = Column(ForeignKey('v_los_coll_trans.id'), comment='Tham chiếu qua bảng LOS_COLL_TRANS')
     person_id = Column(NUMBER(asdecimal=False), comment='Tham chiếu qua bảng Person để lấy đúng ID ')
     owner_type_id = Column(VARCHAR(50), comment='Loại hình sở hữu (Chính chủ, Đồng sở hữu….)')
     display_order = Column(NUMBER(asdecimal=False), comment='Số thứ tự hiển thị ')
 
+    trans = relationship('VLosCollTran')
 
-class CountryManufacture(Base):
-    __tablename__ = 'los_ma_coll_coun_manu'
 
-    country_code = Column("COUNTRY_CODE", VARCHAR(3), primary_key=True)
-
-    name = Column("NAME", VARCHAR(105), comment="Tên tiếng Việt")
-
-    other_value_flag = Column("OTHER_VALUE_FLAG", VARCHAR(1), comment='Giá trị khác, khi chọn vào thì chuyển qua nhập tay')
-
-    display_order = Column("DISPLAY_ORDER", NUMBER(asdecimal=False), comment='Số thứ tự hiển thị')

@@ -1,4 +1,6 @@
-from sqlalchemy import CHAR, VARCHAR, Column, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
 
@@ -6,14 +8,11 @@ from database.base import BaseModel
 class PolicyDetail(BaseModel):
     __tablename__ = 'los_policy_detail'
 
-    id = Column("ID", Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(VARCHAR(100))
+    description = Column(VARCHAR(300))
+    code = Column(VARCHAR(5), comment='Mã ngoại lệ')
+    policy_group_id = Column(ForeignKey('los_policy_group.id'), comment='Nhóm mã ngoại lệ')
+    actived_flag = Column(CHAR(1))
 
-    name = Column('NAME', VARCHAR(100))
-
-    description = Column("DESCRIPTION", VARCHAR(300))
-
-    code = Column('CODE', CHAR(5), comment='Mã ngoại lệ')
-
-    policy_group_id = Column('POLICY_GROUP_ID', Integer)
-
-    actived_flag = Column('ACTIVED_FLAG', CHAR(1))
+    policy_group = relationship('LosPolicyGroup')

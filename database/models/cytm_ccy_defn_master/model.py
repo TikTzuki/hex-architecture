@@ -1,4 +1,6 @@
-from sqlalchemy import CHAR, VARCHAR, Column
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.oracle import NUMBER
 
 from database import Base
@@ -7,12 +9,8 @@ from database import Base
 class CytmCcyDefnMaster(Base):
     __tablename__ = 'los_cytm_ccy_defn_master'
 
-    ccy_code = Column("CCY_CODE", VARCHAR(3), primary_key=True)
-
-    ccy_name = Column("CCY_NAME", VARCHAR(105))
-
-    ccy_decimals = Column("CCY_DECIMALS", NUMBER(1, 0, False))
-
-    ccy_round_rule = Column("CCY_ROUND_RULE", CHAR(1))
-
-    ccy_round_unit = Column("CCY_ROUND_UNIT", NUMBER(7, 3, True))
+    ccy_code = Column(VARCHAR(3), primary_key=True)
+    ccy_name = Column(VARCHAR(105))
+    ccy_decimals = Column(NUMBER(1, 0, False))
+    ccy_round_rule = Column(CHAR(1))
+    ccy_round_unit = Column(NUMBER(7, 3, True))

@@ -1,17 +1,18 @@
-from sqlalchemy import Column, Float, Integer
+from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
 
 
-class BusinessFinanceCashFlowValue(BaseModel):
+class BusinessFinanceCashflowValue(BaseModel):
     __tablename__ = 'los_business_finance_cashflow_value'
     __table_args__ = {'comment': 'Doanh thu bình quân phải thu theo thời gian'}
 
-    id = Column("ID", Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    business_finance_cashflow_id = Column(ForeignKey('los_business_finance_cashflow.id'))
+    finance_timeline_assign_id = Column(Integer, comment='Tham chiếu qua bảng TIMELINE_ASSIGN để biết được cụ thể là thời gian và người  tạo.')
+    value = Column(Float)
 
-    business_finance_cashflow_id = Column('BUSINESS_FINANCE_CASHFLOW_ID', Integer)
-
-    finance_timeline_assign_id = Column("FINANCE_TIMELINE_ASSIGN_ID", Integer,
-                                        comment='Tham chiếu qua bảng TIMELINE_ASSIGN để biết được cụ thể là thời gian và người  tạo.')
-
-    value = Column("VALUE", Float)
+    business_finance_cashflow = relationship('LosBusinessFinanceCashflow')

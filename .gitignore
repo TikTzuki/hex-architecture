@@ -1,7 +1,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-__init__.py
+
 # Customize
 .idea/
 .DS_Store

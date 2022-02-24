@@ -1,9 +1,9 @@
 from .asset.other.model import AssetOther
 from .asset.real_estate.model import AssetRealEstate
-from .asset.real_transportation.model import AssetTransportation
-from .business_finance_cashflow.model import BusinessFinanceCashflow
-from .business_finance_cashflow.value.model import BusinessFinanceCashflowValue
-from .business_finance_cashflow.vendor.model import (
+from .asset.transportation.model import AssetTransportation
+from database.models.loan_info.business_finance_cashflow.model import BusinessFinanceCashflow
+from database.models.loan_info.business_finance_cashflow.value.model import BusinessFinanceCashflowValue
+from database.models.loan_info.business_finance_cashflow.vendor.model import (
     BusinessFinanceCashflowVendor
 )
 from .collateral.cargo.model import CollCargo, CollCargoOwner
@@ -39,16 +39,16 @@ from .collateral.transportation.model import (
 from .collateral.valuation_cert import (
     CollPriceCert, CollPriceCertAsset, CollPriceCertAssetAppraisal, CollRe
 )
-from .credit.card.model import CreditCard
-from .credit.collateral.model import CreditCollateral
-from .credit.institution.model import CreditInstitution, CreditInstitutionLoan
+from .cic.card.model import CreditCard
+from .cic.collateral.model import CreditCollateral
+from .cic.institution.model import CreditInstitution, CreditInstitutionLoan
 from .cytm_ccy_defn_master.model import CytmCcyDefnMaster
 from .detm_clg_brn_code.model import DetmClgBrnCode
-from .finance.matadata.model import (
+from .finance.metadata.model import (
     FinanceMetadata, FinanceMetadataGroup, FinanceMetadataItem
 )
 from .finance.timeline.model import FinanceTimeline, FinanceTimelineAssign
-from .income_squence.model import IncomeSequence
+from database.models.income.income_squence.model import IncomeSequence
 from .loan_product.model import LoanProduct, LoanProductPolicy
 from .ma import (
     LosMaCollTransType, MaAppraisalUnit, MaBankCode, MaBusinessLine,
@@ -57,13 +57,13 @@ from .ma import (
     MaCreditGroupCustomer, MaCreditGroupCustomerItem, MaCreditProductCard,
     MaCustomerType, MaDocumentType, MaFrequence, MaPersonalRep, MaQuestion
 )
-from .partner.model import Partner, PartnerLoanProduct, PartnerProduct
+from database.models.product_group.partner.model import Partner, PartnerLoanProduct, PartnerProduct
 from .person.address.model import PersonAddress
 from .person.business.address.model import PersonBusinessAddress
 from .person.business.finance_report.model import PersonBusinessFinanceReport
 from .person.business.model import PersonBusiness
 from .person.business.warehouse.model import PersonBusinessWarehouse
-from .person.credit_institurion_relationship.model import (
+from database.models.cic.credit_institurion_relationship.model import (
     PersonCreditInstitutionRelationship
 )
 from .person.credit_score.model import (

@@ -43,8 +43,7 @@ class BaseModel(Base):
 
     created_by = Column("CREATED_BY", String(20), default=None)
 
-    modified_at = Column("MODIFIED_AT", DateTime, default=datetime.now, onupdate=datetime.now,
-                         server_default=func.now())
+    modified_at = Column("MODIFIED_AT", DateTime, default=datetime.now, onupdate=datetime.now, server_default=func.now())
 
     modified_by = Column("MODIFIED_BY", String(20), default=None)
 

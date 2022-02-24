@@ -1,7 +1,6 @@
 from database.models.cic.credit_institurion_relationship.model import (
     PersonCreditInstitutionRelationship
 )
-from database.models.income.income_squence.model import IncomeSequence
 from database.models.loan_info.business_finance_cashflow.model import (
     BusinessFinanceCashflow
 )
@@ -20,7 +19,8 @@ from .asset.real_estate.model import AssetRealEstate
 from .asset.transportation.model import AssetTransportation
 from .cic.card.model import CreditCard
 from .cic.collateral.model import CreditCollateral
-from .cic.institution.model import CreditInstitution, CreditInstitutionLoan
+from .cic.credit_score.model import PersonCreditScore, PersonCreditScoreSegment
+from .cic.institution.model import CreditInstitutionLoan
 from .collateral.cargo.model import CollCargo, CollCargoOwner
 from .collateral.machine.model import CollMachine, CollMachineOwner
 from .collateral.model import Collateral
@@ -54,41 +54,48 @@ from .collateral.transportation.model import (
 from .collateral.valuation_cert import (
     CollPriceCert, CollPriceCertAsset, CollPriceCertAssetAppraisal, CollRe
 )
-from .cytm_ccy_defn_master.model import CytmCcyDefnMaster
-from .detm_clg_brn_code.model import DetmClgBrnCode
-from .finance.metadata.model import (
+from .loan_info.business.address.model import PersonBusinessAddress
+from .loan_info.business.finance_report.model import (
+    PersonBusinessFinanceReport
+)
+from .loan_info.business.model import PersonBusiness
+from .loan_info.business.warehouse.model import PersonBusinessWarehouse
+from .loan_info.finance.metadata.model import (
     FinanceMetadata, FinanceMetadataGroup, FinanceMetadataItem
 )
-from .finance.timeline.model import FinanceTimeline, FinanceTimelineAssign
-from .loan_product.model import LoanProduct, LoanProductPolicy
-from .ma import (
+from .loan_info.finance.timeline.model import (
+    FinanceTimeline, FinanceTimelineAssign
+)
+from .metadata.cic import CreditInstitution
+from .metadata.cytm_ccy_defn_master.model import CytmCcyDefnMaster
+from .metadata.loan_product.model import LoanProduct, LoanProductPolicy
+from .metadata.ma import (
     LosMaCollTransType, MaAppraisalUnit, MaBankCode, MaBusinessLine,
     MaBusinessType, MaCardPromotion, MaCicScore, MaCicScoreDetail,
     MaCollMachineLegal, MaCollType, MaCostType, MaCreditCard,
     MaCreditGroupCustomer, MaCreditGroupCustomerItem, MaCreditProductCard,
     MaCustomerType, MaDocumentType, MaFrequence, MaPersonalRep, MaQuestion
 )
+from .metadata.policy.detail.model import PolicyDetail
+from .metadata.policy.group.model import PolicyGroup
+from .metadata.policy.model import Policy
+from .metadata.policy.rule.model import PolicyRule
+from .metadata.sttm.branch.model import Branch
+from .metadata.sttm.country.model import Country
+from .metadata.sttm.district.model import District
+from .metadata.sttm.province.model import Province
+from .metadata.sttm.regional_office.model import RegionalOffice
+from .metadata.sttm.ward.model import Ward
+from .metadata.udtm_lov.model import UdtmLov
+from .other_profile.exception_item.model import ProfileExceptionItem
+from .other_profile.risk_item.model import ProfileRiskItem
 from .person.address.model import PersonAddress
-from .person.business.address.model import PersonBusinessAddress
-from .person.business.finance_report.model import PersonBusinessFinanceReport
-from .person.business.model import PersonBusiness
-from .person.business.warehouse.model import PersonBusinessWarehouse
-from .person.credit_score.model import (
-    PersonCreditScore, PersonCreditScoreSegment
-)
 from .person.education.model import PersonEducation
 from .person.fcc_core.model import PersonFccCore
-from .person.group_income.model import (
-    PersonGroupIncome, PersonGroupIncomeDetail
-)
 from .person.identity.model import PersonIdentity
 from .person.married.model import PersonMarried
 from .person.model import Person
 from .person.relationship.model import PersonalRelationship
-from .policy.detail.model import PolicyDetail
-from .policy.group.model import PolicyGroup
-from .policy.model import Policy
-from .policy.rule.model import PolicyRule
 from .product.document_rule.model import ProductDocumentRule
 from .product.promotion.model import ProductPromotion
 from .product.question.model import ProductQuestion
@@ -103,10 +110,8 @@ from .profile.credit.statement_method.model import ProfileCreditStatementMethod
 from .profile.credit.supp_card.model import ProfileCreditSuppCard
 from .profile.cust_group_item.model import ProfileCustGroupItem
 from .profile.document.model import ProfileDocument
-from .profile.exception_item.model import ProfileExceptionItem
 from .profile.income.model import ProfileIncome
 from .profile.model import Profile
-from .profile.risk_item.model import ProfileRiskItem
 from .profile.score.model import ProfileScore
 from .profile.squence_item.model import ProfileSequenceItem
 from .source_income.business_household.model import (
@@ -115,21 +120,21 @@ from .source_income.business_household.model import (
 from .source_income.company.model import SourceIncomeCompany
 from .source_income.deposit.model import SourceIncomeDeposit
 from .source_income.group_asset.model import SourceIncomeGroupAsset
+from .source_income.group_income.model import (
+    PersonGroupIncome, PersonGroupIncomeDetail
+)
+from .source_income.income_squence.model import IncomeSequence
 from .source_income.other.model import SourceIncomeOther
 from .source_income.pension.model import SourceIncomePension
 from .source_income.salary.model import SourceIncomeSalary
 from .source_income.stock.model import SourceIncomeStock
-from .sttm.branch.model import Branch
-from .sttm.country.model import Country
-from .sttm.district.model import District
-from .sttm.province.model import Province
-from .sttm.regional_office.model import RegionalOffice
-from .sttm.ward.model import Ward
-from .template.product_report.model import MaLoanProductReport
-from .template.profile_reports.model import ProfileReports
-from .template.profile_reports.reports_log.model import ProfileReportLog
-from .udtm_lov.model import UdtmLov
+from .unknows.detm_clg_brn_code import DetmClgBrnCode
 from .unknows.getb_coll_category import GetmCollCategory
+from .unknows.template.product_report.model import MaLoanProductReport
+from .unknows.template.profile_reports.model import ProfileReports
+from .unknows.template.profile_reports.reports_log.model import (
+    ProfileReportLog
+)
 
 __all__ = [
     'AssetOther',

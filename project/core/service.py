@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from .base import Base
 
 
-class ControllerBase(Base):
+class Service(Base):
     """
     Controller use business
     """

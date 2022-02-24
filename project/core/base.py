@@ -1,3 +1,4 @@
+import abc
 from abc import ABC
 from typing import Any, Dict, List, Optional, Union
 
@@ -9,7 +10,8 @@ from .exception import LOSError
 from .schemas import CustomBaseModel
 
 
-class Base(ABC):
+class Base(metaclass=abc.ABCMeta):
+
     def __init__(self, model=CustomBaseModel):
         self.raw_errors: List[ErrorList] = []
         self.model = model

@@ -82,6 +82,14 @@ class PageResponse(CustomGenericModel, Generic[TypeX]):
     warning: List[Warn] = []
 
 
+class Page(CustomGenericModel, Generic[TypeX]):
+    data: List[TypeX]
+    total_items: int = 0
+    total_page: int = 0
+    current_page: int = 0
+    warning: List[Warn] = []
+
+
 class DataResponse(CustomGenericModel, Generic[TypeX]):
     data: TypeX = None
     warning: List[Warn] = []

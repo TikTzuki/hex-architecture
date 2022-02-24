@@ -1,5 +1,4 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
-from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy import VARCHAR, Column, Float, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
@@ -23,4 +22,3 @@ class SourceIncomeBusinessHousehold(BaseModel):
     income_ratio = Column(Float)
 
     person_group_income = relationship('LosPersonGroupIncome')
-

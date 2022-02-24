@@ -1,6 +1,4 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
-from sqlalchemy.dialects.oracle import NUMBER
-from sqlalchemy.orm import relationship
+from sqlalchemy import CHAR, VARCHAR, Column, DateTime, Integer
 
 from database.base import BaseModel
 
@@ -42,5 +40,3 @@ class Person(BaseModel):
     birthplace = Column(VARCHAR(200), comment='Nơi sinh')
     note = Column(VARCHAR(500), comment='Ghi chú')
     car_used_flag = Column(VARCHAR(1), comment='Có sử dụng xe ô tô không. ')
-
-

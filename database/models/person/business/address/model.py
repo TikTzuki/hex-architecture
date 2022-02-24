@@ -1,5 +1,6 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
-from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy import (
+    CHAR, VARCHAR, Column, DateTime, Float, ForeignKey, Integer
+)
 from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
@@ -8,7 +9,6 @@ from database.base import BaseModel
 class PersonBusinessAddress(BaseModel):
     __tablename__ = 'los_person_business_address'
     __table_args__ = {'comment': 'Địa chỉ hoạt động của doanh nghiệp, hộ kinh doanh,'}
-
 
     id = Column(Integer, primary_key=True)
     person_business_id = Column(ForeignKey('los_person_business.id'))

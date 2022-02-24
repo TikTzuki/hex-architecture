@@ -1,5 +1,6 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
-from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy import (
+    CHAR, VARCHAR, Column, DateTime, Float, ForeignKey, Integer
+)
 from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
@@ -30,4 +31,3 @@ class PersonAddress(BaseModel):
     name_working_unit = Column(VARCHAR(200), comment='Tên đơn vị làm việc')
 
     person = relationship('LosPerson')
-

@@ -1,7 +1,6 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy import VARCHAR, Column, DateTime, ForeignKey, text
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.oracle import VARCHAR2
 
 from database.base import BaseModel
 
@@ -9,7 +8,6 @@ from database.base import BaseModel
 class ProfileReports(BaseModel):
     __tablename__ = 'los_profile_reports'
     __table_args__ = {'comment': 'Mã báo cáo theo hồ sơ vay vốn'}
-
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
     loan_product_report_id = Column(ForeignKey('los_ma_loan_product_report.id'))

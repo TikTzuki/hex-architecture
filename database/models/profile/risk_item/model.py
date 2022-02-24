@@ -1,4 +1,4 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy import VARCHAR, Column, DateTime, ForeignKey, Integer
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
 
@@ -22,4 +22,3 @@ class ProfileRiskItem(BaseModel):
     los_credit_sequence_id = Column(NUMBER(asdecimal=False), comment='link tới table LOS_PROFILE_CREDIT_SEQUENCE_ITEM')
 
     los_sequence = relationship('LosProfileSequenceItem')
-

@@ -1,5 +1,4 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
-from sqlalchemy.dialects.oracle import NUMBER
+from sqlalchemy import CHAR, VARCHAR, Column, DateTime, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 from database.base import BaseModel
@@ -8,7 +7,6 @@ from database.base import BaseModel
 class PersonIdentity(BaseModel):
     __tablename__ = 'los_person_identity'
     __table_args__ = {'comment': 'Danh sách các hồ sơ pháp lý, cccd, cmnd.....'}
-
 
     id = Column(Integer, primary_key=True)
     identity_type = Column(VARCHAR(20), comment='Loại hồ sơ: CCCD, CMND, PASSPORT....')

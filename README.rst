@@ -150,5 +150,3 @@ Run test
 - Exclude internal_credit_rating: ::
 
     pytest --color=yes -s -v --show-capture=no --ignore=tests/normal_loan/internal_credit_rating
-
-

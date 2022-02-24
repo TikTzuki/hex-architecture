@@ -1,4 +1,4 @@
-from sqlalchemy import CHAR, Column, DateTime, Float, Integer, VARCHAR, text
+from sqlalchemy import CHAR, VARCHAR, Column, DateTime, Float, Integer, text
 from sqlalchemy.dialects.oracle import VARCHAR2
 
 from database import Base, BaseModel

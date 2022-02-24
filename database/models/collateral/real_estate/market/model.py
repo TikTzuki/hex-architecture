@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, VARCHAR
+from sqlalchemy import VARCHAR, Column, DateTime, Float, ForeignKey, Integer
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
 

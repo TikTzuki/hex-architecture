@@ -1,6 +1,4 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
-from sqlalchemy.dialects.oracle import NUMBER
-from sqlalchemy.orm import relationship
+from sqlalchemy import CHAR, VARCHAR, Column, Integer
 
 from database.base import BaseModel
 
@@ -8,7 +6,6 @@ from database.base import BaseModel
 class Profile(BaseModel):
     __tablename__ = 'los_profile'
     __table_args__ = {'comment': 'Hồ sơ LOS'}
-
 
     id = Column(VARCHAR(20), primary_key=True, comment='Hồ sơ los theo quy định mã')
     term = Column(VARCHAR(20), comment='Loại hình cho vay')

@@ -1,7 +1,4 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
-from sqlalchemy.dialects.oracle import NUMBER
-from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.oracle import VARCHAR2
+from sqlalchemy import VARCHAR, Column, DateTime, Float, Integer, text
 
 from database.base import BaseModel
 
@@ -51,4 +48,3 @@ class ProfileSequenceItem(BaseModel):
     able_pay_type = Column(VARCHAR(3), comment='Xác nhận đã thẩm định thành công và đủ khả năng về thanh toán chi phí sinh hoạt khác. hoặc khong đủ khả năng thành toán....')
     able_capital_requirement = Column(VARCHAR(100), comment='Đánh giá  về phương án và nhu cầu vay vốn')
     summary = Column(VARCHAR(500), comment='Nhận xét')
-

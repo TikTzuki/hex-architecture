@@ -1,10 +1,8 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy import VARCHAR, Column, ForeignKey
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.oracle import NUMBER
 
-from database import Base, BaseModel
-
+from database import BaseModel
 
 
 class CollTran(BaseModel):
@@ -31,8 +29,6 @@ class CollTran(BaseModel):
     quality_rest_ratio = Column(VARCHAR(50), comment='Tỷ lệ chất lượng còn lại của tài sản ')
 
     price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
-
-
 
 
 class CollTransLegalDocument(BaseModel):
@@ -67,5 +63,3 @@ class CollTransOwner(BaseModel):
     display_order = Column(NUMBER(asdecimal=False), comment='Số thứ tự hiển thị ')
 
     trans = relationship('VLosCollTran')
-
-

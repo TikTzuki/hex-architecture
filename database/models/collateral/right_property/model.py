@@ -1,7 +1,6 @@
-from sqlalchemy import CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, Table, Text, VARCHAR, text
+from sqlalchemy import VARCHAR, Column, ForeignKey
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.oracle import NUMBER
 
 from database.base import BaseModel
 

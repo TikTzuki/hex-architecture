@@ -1,3 +1,4 @@
+from test.test_model import test_model
 from typing import Dict
 
 from fastapi import APIRouter, Depends
@@ -26,6 +27,7 @@ class APIVersion1:
     async def get_st(self) -> Dict:
         # print(self.session.execute("SELECT name FROM sqlite_schema").all())
         # print(self.session.execute("SELECT table_name FROM user_tables").all())
+        await test_model(self.session)
         name = self.service.get_name()
         return {"name": name}
 

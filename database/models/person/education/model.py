@@ -13,4 +13,4 @@ class PersonEducation(BaseModel):
     approval_date = Column(DateTime)
     actived_flag = Column(CHAR(1))
 
-    person = relationship('LosPerson')
+    person = relationship('Person')

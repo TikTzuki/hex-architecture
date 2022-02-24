@@ -17,4 +17,4 @@ class SourceIncomeGroupAsset(BaseModel):
     income_amount = Column(Float)
     display_order = Column(Integer)
 
-    person_group_income = relationship('LosPersonGroupIncome')
+    person_group_income = relationship('PersonGroupIncome')

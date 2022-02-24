@@ -23,7 +23,7 @@ class CollMachine(BaseModel):
     description = Column(VARCHAR(200), comment='Mô tả tài sản')
     amount = Column(NUMBER(asdecimal=False), comment='Số lượng (chiếc)')
 
-    price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
+    price_cert_asset_appraisal = relationship('CollPriceCertAssetAppraisal')
 
 
 class CollMachineOwner(BaseModel):
@@ -36,4 +36,4 @@ class CollMachineOwner(BaseModel):
     owner_type_id = Column(VARCHAR(50), comment='Loại hình sở hữu (Chính chủ, Đồng sở hữu….)')
     display_order = Column(NUMBER(asdecimal=False), comment='Số thứ tự hiển thị ')
 
-    machine = relationship('VLosCollMachine')
+    machine = relationship('CollMachine')

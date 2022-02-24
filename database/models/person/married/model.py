@@ -12,4 +12,4 @@ class PersonMarried(BaseModel):
     married_status = Column(VARCHAR(20), comment='(tham chiếu trong bảng udtm )')
     approval_date = Column(DateTime, comment='Bắt đầu tính từ ngày.')
 
-    person = relationship('LosPerson')
+    person = relationship('Person')

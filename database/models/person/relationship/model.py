@@ -17,4 +17,4 @@ class PersonalRelationship(BaseModel):
 
     family_relationship_type = Column(VARCHAR(20), comment='Mối quan hệ với người vay trong gia đình như anh/chị em, vợ chồng, bố mẹ,con cái')
 
-    person = relationship('LosPerson')
+    person = relationship('Person')

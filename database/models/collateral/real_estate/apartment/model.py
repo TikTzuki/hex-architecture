@@ -14,7 +14,7 @@ class CollReApart(BaseModel):
     legal_status = Column(VARCHAR(50), comment='Tình trạng pháp lý ')
     apartment_name = Column(VARCHAR(200), comment='Tên chung cư dự án')
 
-    price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
+    price_cert_asset_appraisal = relationship('CollPriceCertAssetAppraisal')
 
 
 class CollReApartRoom(BaseModel):
@@ -36,7 +36,7 @@ class CollReApartRoom(BaseModel):
     duration_cert = Column(VARCHAR(200), comment='Thời hạn sở hữu theo GCN')
     components = Column(VARCHAR(200), comment='Hạng mục được sở hữu chung ngoài căn hộ theo GCN')
 
-    re_apart = relationship('VLosCollReApart')
+    re_apart = relationship('CollReApart')
 
 
 class CollReApartLand(BaseModel):
@@ -56,7 +56,7 @@ class CollReApartLand(BaseModel):
     purpose_land_id = Column(JSONSQL(50), comment='Mục đích sử dụng đất ( theo thẩm định giá)')
     purpose_land_other = Column(VARCHAR(200), comment='Mục đích sử dụng đất ( theo thẩm định giá) khác')
 
-    re_apart = relationship('VLosCollReApart')
+    re_apart = relationship('CollReApart')
 
 
 class CollReApartLandUsed(BaseModel):
@@ -77,7 +77,7 @@ class CollReApartLandUsed(BaseModel):
     method_used_other = Column(VARCHAR(200), comment='Hình thức sử dụng đất theo GCN Khác')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_apart_land = relationship('VLosCollReApartLand')
+    re_apart_land = relationship('CollReApartLand')
 
 
 class CollReApartOwner(BaseModel):
@@ -91,7 +91,7 @@ class CollReApartOwner(BaseModel):
     owner_auth_flag = Column(VARCHAR(1), comment='Có uỷ quyền cho người khác không Y/N')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_apart = relationship('VLosCollReApart')
+    re_apart = relationship('CollReApart')
 
 
 class CollReApartOwnerCert(BaseModel):
@@ -103,7 +103,7 @@ class CollReApartOwnerCert(BaseModel):
     display_order = Column(Integer)
     actived_flag = Column(VARCHAR(2))
 
-    re_apart = relationship('VLosCollReApart')
+    re_apart = relationship('CollReApart')
 
 
 class CollReApartOwnerCertItem(BaseModel):
@@ -124,7 +124,7 @@ class CollReApartOwnerCertItem(BaseModel):
     contract_date = Column(DateTime, comment='Ngày hợp đồng')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_apart_owner_cert = relationship('VLosCollReApartOwnerCert')
+    re_apart_owner_cert = relationship('CollReApartOwnerCert')
 
 
 class CollReApartOwnerAuth(BaseModel):
@@ -139,4 +139,4 @@ class CollReApartOwnerAuth(BaseModel):
     contract_authorized = Column(VARCHAR(200), comment='Hợp đồng uỷ quyền ')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_apart_owner = relationship('VLosCollReApartOwner')
+    re_apart_owner = relationship('CollReApartOwner')

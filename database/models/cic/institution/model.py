@@ -29,7 +29,6 @@ class CreditInstitutionLoan(BaseModel):
     debt = Column(Float, comment='Số dư nợ')
     debt_classification = Column(VARCHAR(20), comment='Nhóm nợ')
     actived_flag = Column(CHAR(1), comment='Tình trạng của khoản nợ.')
-
     credit_limit = Column(Float)
 
-    personal_cir = relationship('LosPerCreditInstiRel')
+    personal_cir = relationship('PersonCreditInstitutionRelationship')

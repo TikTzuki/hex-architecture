@@ -22,4 +22,4 @@ class PersonBusinessFinanceReport(BaseModel):
     able_pay_type = Column(CHAR(3), comment='Xác nhận đã thẩm định thành công và đủ khả năng về thanh toán chi phí sinh hoạt khác. hoặc khong đủ khả năng thành toán....')
     able_capital_requirement = Column(VARCHAR(100), comment='Đánh giá  về phương án và nhu cầu vay vốn')
 
-    person_business = relationship('LosPersonBusines')
+    person_business = relationship('PersonBusiness')

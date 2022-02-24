@@ -15,4 +15,4 @@ class CreditCard(BaseModel):
     due_date = Column(DateTime, comment='Thời hạn của thẻ tín dụng')
     debt = Column(Float, comment='Dư nợ thẻ')
 
-    personal_cir = relationship('LosPerCreditInstiRel')
+    personal_cir = relationship('PersonCreditInstitutionRelationship')

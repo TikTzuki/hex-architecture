@@ -16,5 +16,5 @@ class Collateral(BaseModel):
     gross_value = Column(Float, comment='Tổng số tiền được trong hồ sơ')
     price_cert_actived_flag = Column(VARCHAR(1), comment='Đã được xác nhận bằng chứng thư định giá')
 
-    credit_sequence = relationship('LosProfileCreditSequenceItem')
-    sequence = relationship('LosProfileSequenceItem')
+    credit_sequence = relationship('ProfileCreditSequenceItem')
+    sequence = relationship('ProfileSequenceItem')

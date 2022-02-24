@@ -18,4 +18,4 @@ class PersonIdentity(BaseModel):
     person_id = Column(ForeignKey('los_person.id'))
     primary_flag = Column(CHAR(1), comment='Loại giấy tờ chính')
 
-    person = relationship('LosPerson')
+    person = relationship('Person')

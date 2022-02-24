@@ -23,4 +23,4 @@ class SourceIncomeDeposit(BaseModel):
     display_order = Column(Integer)
     income_ratio = Column(Float)
 
-    person_group_income = relationship('LosPersonGroupIncome')
+    person_group_income = relationship('PersonGroupIncome')

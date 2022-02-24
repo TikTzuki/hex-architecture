@@ -23,7 +23,7 @@ class CollReMarket(BaseModel):
     area_value = Column(Float, comment='Diện tích tính giá trị (m2)')
     structural_cert = Column(VARCHAR(200), comment='Kết cấu theo chứng từ pháp lý')
 
-    price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
+    price_cert_asset_appraisal = relationship('CollPriceCertAssetAppraisal')
 
 
 class CollReMarketCert(BaseModel):
@@ -35,7 +35,7 @@ class CollReMarketCert(BaseModel):
     display_order = Column(Integer)
     actived_flag = Column(VARCHAR(10))
 
-    re_market = relationship('VLosCollReMarket')
+    re_market = relationship('CollReMarket')
 
 
 class CollReMarketCertItem(BaseModel):
@@ -55,7 +55,7 @@ class CollReMarketCertItem(BaseModel):
     lessor = Column(VARCHAR(100), comment='Bên cho thuê')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    re_market_cert = relationship('VLosCollReMarketCert')
+    re_market_cert = relationship('CollReMarketCert')
 
 
 class CollReMarketOwner(BaseModel):
@@ -69,7 +69,7 @@ class CollReMarketOwner(BaseModel):
     owner_auth_flag = Column(VARCHAR(1), comment='Có uỷ quyền cho người khác không Y/N')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    re_market = relationship('VLosCollReMarket')
+    re_market = relationship('CollReMarket')
 
 
 class CollReMarketOwnerAuth(BaseModel):
@@ -84,4 +84,4 @@ class CollReMarketOwnerAuth(BaseModel):
     contract_authorized = Column(VARCHAR(200), comment='Hợp đồng uỷ quyền ')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    re_market_owner = relationship('VLosCollReMarketOwner')
+    re_market_owner = relationship('CollReMarketOwner')

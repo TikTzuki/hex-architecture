@@ -26,4 +26,4 @@ class SourceIncomeCompany(BaseModel):
     income_ratio = Column(Float)
     uuid = Column(VARCHAR(50))
 
-    person_group_income = relationship('LosPersonGroupIncome')
+    person_group_income = relationship('PersonGroupIncome')

@@ -42,7 +42,7 @@ Then Install ``pre-commit``: ::
 To run the web application in debug use::
 
     Develop:
-    - uvicorn --env-file .env app.main:app --port {port} --reload
+    - uvicorn --env-file .env main:app --port 8000 --reload
     Deloy:
     - gunicorn app.main:app -k uvicorn.workers.UvicornWorker
 
@@ -126,7 +126,7 @@ Báo cáo tiến độ task
 
 Structure: ``#<ten> <yyyy/mm/dd> <project> <id_issue> <mô tả ngắn tiến độ>``
 
-Example:  #phuongnd 2021/08/04   LOS  #0 Review & support code , merge 6 step
+Example:  #longtpt 2021/08/04   LOS  #0 Review & support code , merge 6 step
 
 
 Refer project

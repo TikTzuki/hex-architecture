@@ -24,7 +24,7 @@ class CollReLand(BaseModel):
     purpose_land_id = Column(JSONSQL(500), comment='Lưu theo dạng format: 1,2,4,5. Tham chiéu qua bảng UDTM')
     purpose_land_other = Column(VARCHAR(200), comment='Lưu trực tiêp value của mục đích sử dụng')
 
-    price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
+    price_cert_asset_appraisal = relationship('CollPriceCertAssetAppraisal')
 
 
 class CollReLandOwner(BaseModel):
@@ -38,7 +38,7 @@ class CollReLandOwner(BaseModel):
     owner_auth_flag = Column(VARCHAR(1), comment='Có uỷ quyền cho người khác không Y/N')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_land = relationship('VLosCollReLand')
+    re_land = relationship('CollReLand')
 
 
 class CollReLandOwnerAuth(BaseModel):
@@ -53,7 +53,7 @@ class CollReLandOwnerAuth(BaseModel):
     contract_authorized = Column(VARCHAR(200), comment='Hợp đồng uỷ quyền ')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_land_owner = relationship('VLosCollReLandOwner')
+    re_land_owner = relationship('CollReLandOwner')
 
 
 class CollReLandCert(BaseModel):
@@ -65,7 +65,7 @@ class CollReLandCert(BaseModel):
     display_order = Column(Integer, comment='Số thứ tự của giấy chứng nhận')
     actived_flag = Column(VARCHAR(10), comment='Có kích hoạt không (Y/N)')
 
-    re_land = relationship('VLosCollReLand')
+    re_land = relationship('CollReLand')
 
 
 class CollReLandCertItem(BaseModel):
@@ -83,7 +83,7 @@ class CollReLandCertItem(BaseModel):
     place_of_issued = Column(VARCHAR(200), comment='Nơi cấp')
     display_order = Column(NUMBER(asdecimal=False), comment='Số thứ tự hiển thị')
 
-    re_land_cert = relationship('VLosCollReLandCert')
+    re_land_cert = relationship('CollReLandCert')
 
 
 class CollReLandUsed(BaseModel):
@@ -104,4 +104,4 @@ class CollReLandUsed(BaseModel):
     method_used_other = Column(VARCHAR(200), comment='Hình thức sử dụng đất theo GCN Khác')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    re_land = relationship('VLosCollReLand')
+    re_land = relationship('CollReLand')

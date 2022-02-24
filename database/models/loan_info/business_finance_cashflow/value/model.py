@@ -13,4 +13,4 @@ class BusinessFinanceCashflowValue(BaseModel):
     finance_timeline_assign_id = Column(Integer, comment='Tham chiếu qua bảng TIMELINE_ASSIGN để biết được cụ thể là thời gian và người  tạo.')
     value = Column(Float)
 
-    business_finance_cashflow = relationship('LosBusinessFinanceCashflow')
+    business_finance_cashflow = relationship('BusinessFinanceCashflow')

@@ -24,4 +24,4 @@ class PersonBusinessWarehouse(BaseModel):
 
     is_default = Column(VARCHAR(1), server_default=text("'N'"))
 
-    person_business_address = relationship('LosPersonBusinessAddres')
+    person_business_address = relationship('PersonBusinessAddress')

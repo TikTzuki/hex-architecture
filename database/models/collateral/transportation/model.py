@@ -28,7 +28,7 @@ class CollTran(BaseModel):
     description = Column(VARCHAR(100), comment='Mô tả tài sản')
     quality_rest_ratio = Column(VARCHAR(50), comment='Tỷ lệ chất lượng còn lại của tài sản ')
 
-    price_cert_asset_appraisal = relationship('VLosCollPriceCertAssetAppraisal')
+    price_cert_asset_appraisal = relationship('CollPriceCertAssetAppraisal')
 
 
 class CollTransLegalDocument(BaseModel):
@@ -49,7 +49,7 @@ class CollTransLegalDocument(BaseModel):
                                        '- Tờ khai hải quan, tờ khai nguồn gốc, tờ khai khác\n'
                                        '- Hợp đồng thương mại, hợp đồng mua bán, hoá đơn (invoice), Khác….\n'
                                        '- Hoá đơn tài chính, Khác….')
-    trans = relationship('VLosCollTran')
+    trans = relationship('CollTran')
 
 
 class CollTransOwner(BaseModel):
@@ -62,4 +62,4 @@ class CollTransOwner(BaseModel):
     owner_type_id = Column(VARCHAR(50), comment='Loại hình sở hữu (Chính chủ, Đồng sở hữu….)')
     display_order = Column(NUMBER(asdecimal=False), comment='Số thứ tự hiển thị ')
 
-    trans = relationship('VLosCollTran')
+    trans = relationship('CollTran')

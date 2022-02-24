@@ -21,4 +21,4 @@ class SourceIncomeBusinessHousehold(BaseModel):
     display_order = Column(Integer, comment='Thứ tự sắp xêp ')
     income_ratio = Column(Float)
 
-    person_group_income = relationship('LosPersonGroupIncome')
+    person_group_income = relationship('PersonGroupIncome')

@@ -2,10 +2,10 @@ from sqlalchemy import VARCHAR, Column, ForeignKey
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
 
-from database.base import BaseModel
+from database import Base
 
 
-class ProfileReportLog(BaseModel):
+class ProfileReportLog(Base):
     __tablename__ = 'los_profile_report_log'
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
@@ -13,4 +13,4 @@ class ProfileReportLog(BaseModel):
     user_id = Column(VARCHAR(32), comment='(̣Người được ghi nhận log)')
     method = Column(VARCHAR(12), comment='(̣Download/Viewer/Edit)')
 
-    los_profile_report = relationship('LosProfileReport')
+    los_profile_report = relationship('ProfileReports')

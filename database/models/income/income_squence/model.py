@@ -17,4 +17,4 @@ class IncomeSequence(BaseModel):
 
     los_credit_sequence_id = Column(NUMBER(asdecimal=False), comment='Link tới table LOS_PROFILE_CREDIT_SEQUENCE_ITEM')
 
-    los_sequence = relationship('LosProfileSequenceItem')
+    los_sequence = relationship('ProfileSequenceItem')

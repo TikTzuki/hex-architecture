@@ -20,4 +20,4 @@ class PersonBusiness(BaseModel):
     place_of_issued = Column(VARCHAR(100))
     year_of_operator = Column(Integer)
 
-    person = relationship('LosPerson')
+    person = relationship('Person')

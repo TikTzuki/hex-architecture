@@ -13,4 +13,4 @@ class PersonFccCore(BaseModel):
     fcc_core_name = Column(VARCHAR(20), comment='Các trường như sau:\\n+ CN_00_CUNG_CAP_TT_FATCA\\n+ THU_NHAP_BQ_03_THANG\\n+ NGHE_NGHIEP')
     fcc_core_value = Column(VARCHAR(50))
 
-    person = relationship('LosPerson')
+    person = relationship('Person')

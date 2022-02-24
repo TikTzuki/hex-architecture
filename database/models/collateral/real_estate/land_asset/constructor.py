@@ -20,7 +20,7 @@ class CollReLandConst(BaseModel):
     gross_value_cons = Column(Float, comment='Giá trị CTXD trên đất theo từng GCN')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_land = relationship('VLosCollReLand')
+    re_land = relationship('CollReLand')
 
 
 class CollReLandConstItem(BaseModel):
@@ -40,7 +40,7 @@ class CollReLandConstItem(BaseModel):
     cert_district_id = Column('cert_distinct_id', VARCHAR(20), comment='Quận / Huyện')
     cert_ward_id = Column(VARCHAR(20), comment='Phường / Xã')
 
-    re_land_const = relationship('VLosCollReLandConst')
+    re_land_const = relationship('CollReLandConst')
 
 
 class CollReLandConstItemDetail(BaseModel):
@@ -67,7 +67,7 @@ class CollReLandConstItemDetail(BaseModel):
     used_time = Column(VARCHAR(50), comment='Thời gian đưa vào sử dụng ')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị')
 
-    re_land_const_item = relationship('VLosCollReLandConstItem')
+    re_land_const_item = relationship('CollReLandConstItem')
 
 
 class CollReLandConstItemOwner(BaseModel):
@@ -81,7 +81,7 @@ class CollReLandConstItemOwner(BaseModel):
     owner_auth_flag = Column(VARCHAR(1), comment='Có uỷ quyền cho người khác không Y/N')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    re_land_const = relationship('VLosCollReLandConst')
+    re_land_const = relationship('CollReLandConst')
 
 
 class CollReLandConstItemOwnerAuth(BaseModel):
@@ -96,7 +96,7 @@ class CollReLandConstItemOwnerAuth(BaseModel):
     contract_authorized = Column(VARCHAR(200), comment='Sô hợp đồng uỷ quyền')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    re_land_const_item_owner = relationship('VLosCollReLandConstItemOwner')
+    re_land_const_item_owner = relationship('CollReLandConstItemOwner')
 
 
 class CollReLandConstItemCert(BaseModel):
@@ -108,7 +108,7 @@ class CollReLandConstItemCert(BaseModel):
     actived_flag = Column(VARCHAR(10))
     display_order = Column(Integer)
 
-    re_land_const = relationship('VLosCollReLandConst')
+    re_land_const = relationship('CollReLandConst')
 
 
 class CollReLandConstItemCertItem(BaseModel):
@@ -126,4 +126,4 @@ class CollReLandConstItemCertItem(BaseModel):
     place_of_issued = Column(VARCHAR(50), comment='Nơi cấp')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    re_land_const_item_cert = relationship('VLosCollReLandConstItemCert')
+    re_land_const_item_cert = relationship('CollReLandConstItemCert')

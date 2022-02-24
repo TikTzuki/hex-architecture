@@ -14,4 +14,4 @@ class PolicyDetail(BaseModel):
     policy_group_id = Column(ForeignKey('los_policy_group.id'), comment='Nhóm mã ngoại lệ')
     actived_flag = Column(CHAR(1))
 
-    policy_group = relationship('LosPolicyGroup')
+    policy_group = relationship('PolicyGroup')

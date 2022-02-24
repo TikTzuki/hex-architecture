@@ -19,4 +19,4 @@ class AssetOther(BaseModel):
     income_ratio = Column(Float)
     license = Column(VARCHAR(100), comment='Giấy chứng nhận, số giấy chứng nhận .....')
 
-    source_income_group_asset = relationship('LosSourceIncomeGroupAsset')
+    source_income_group_asset = relationship('SourceIncomeGroupAsset')

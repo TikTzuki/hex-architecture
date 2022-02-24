@@ -24,4 +24,4 @@ class AssetRealEstate(BaseModel):
     display_order = Column(Integer)
     ratio_income = Column(Float)
 
-    source_income_group_asset = relationship('LosSourceIncomeGroupAsset')
+    source_income_group_asset = relationship('SourceIncomeGroupAsset')

@@ -2,10 +2,10 @@ from sqlalchemy import VARCHAR, Column, ForeignKey
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
 
-from database.base import BaseModel
+from database.base import Base
 
 
-class MaLoanProductReport(BaseModel):
+class MaLoanProductReport(Base):
     __tablename__ = 'los_ma_loan_product_report'
 
     id = Column(NUMBER(asdecimal=False), primary_key=True)
@@ -18,4 +18,4 @@ class MaLoanProductReport(BaseModel):
     split_flag = Column(VARCHAR(1), comment='(̣Cho phép chia nhỏ báo cáo làm nhiều lần để hoàn thiện)')
     display_order = Column(NUMBER(asdecimal=False), comment='(̣Thứ tự hiển thị của văn bản, Số thứ tự đi theo nhóm mỗi nhóm lại lặp lại 1,2,3)')
 
-    loan_product = relationship('LosLoanProduct')
+    loan_product = relationship('LoanProduct')

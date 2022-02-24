@@ -19,4 +19,4 @@ class ProfileExceptionItem(BaseModel):
     los_credit_sequence_id = Column(NUMBER(asdecimal=False), comment='link tới table LOS_PROFILE_CREDIT_SEQUENCE_ITEM')
     realistic_interpretation = Column(VARCHAR(200), comment='Diễn giải thực tế')
 
-    los_sequence = relationship('LosProfileSequenceItem')
+    los_sequence = relationship('ProfileSequenceItem')

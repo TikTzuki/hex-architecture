@@ -17,7 +17,7 @@ class PersonGroupIncome(BaseModel):
     occasional_income_amount = Column(Float, comment='Tổng thu nhập không thường xuyên')
     permanent_income_amount = Column(Float, comment='Tổng thu nhập thường xuyên')
 
-    los_profile_income = relationship('LosProfileIncome')
+    los_profile_income = relationship('ProfileIncome')
 
 
 class PersonGroupIncomeDetail(BaseModel):

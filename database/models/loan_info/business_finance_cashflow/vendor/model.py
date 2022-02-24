@@ -16,4 +16,4 @@ class BusinessFinanceCashflowVendor(BaseModel):
     actived_flag = Column(VARCHAR(1))
     is_default = Column(VARCHAR(1), comment='Đánh dấu có phải nhà cung cấp chính hay không')
 
-    business_finance_cashflow = relationship('LosBusinessFinanceCashflow')
+    business_finance_cashflow = relationship('BusinessFinanceCashflow')

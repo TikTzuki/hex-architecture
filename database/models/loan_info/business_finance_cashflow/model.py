@@ -12,4 +12,4 @@ class BusinessFinanceCashflow(BaseModel):
     business_finance_report_id = Column(ForeignKey('los_person_business_finance_report.id'))
     cashflow_type = Column(VARCHAR(20), comment='Loại đầu vào đầu ra (tham chiếu trong bảng udtm )')
 
-    business_finance_report = relationship('LosPersonBusinessFinanceReport')
+    business_finance_report = relationship('PersonBusinessFinanceReport')

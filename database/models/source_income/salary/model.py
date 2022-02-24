@@ -38,4 +38,4 @@ class SourceIncomeSalary(BaseModel):
     phone = Column(VARCHAR(20), comment='Số điện thoại')
     position = Column(VARCHAR(100), comment='Chức vụ')
 
-    person_group_income = relationship('LosPersonGroupIncome')
+    person_group_income = relationship('PersonGroupIncome')

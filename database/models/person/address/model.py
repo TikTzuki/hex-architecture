@@ -30,4 +30,4 @@ class PersonAddress(BaseModel):
     primary_flag = Column(CHAR(1), comment='Địa chỉ  chính')
     name_working_unit = Column(VARCHAR(200), comment='Tên đơn vị làm việc')
 
-    person = relationship('LosPerson')
+    person = relationship('Person')

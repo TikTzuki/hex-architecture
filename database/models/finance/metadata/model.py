@@ -27,7 +27,7 @@ class FinanceMetadata(BaseModel):
     display_order_calculator = Column(Integer, comment='Thứ tự để tính toán')
     field_type = Column(VARCHAR(50), comment='Phân biệt field: Tổng tài sản, Nguồn vốn, ...')
 
-    metadata_group = relationship('LosFinanceMetadataGroup')
+    metadata_group = relationship('FinanceMetadataGroup')
 
 
 class FinanceMetadataGroup(BaseModel):
@@ -51,4 +51,4 @@ class FinanceMetadataItem(BaseModel):
 
     finance_timeline_assign_id = Column(VARCHAR(20))
 
-    business_finance_report = relationship('LosPersonBusinessFinanceReport')
+    business_finance_report = relationship('PersonBusinessFinanceReport')

@@ -28,4 +28,4 @@ class PersonBusinessAddress(BaseModel):
     business_address_type = Column(VARCHAR(20), comment='Loại địa chỉ: Địa chỉ kinh doanh, kho hàng.....')
     uuid = Column(VARCHAR(50))
 
-    person_business = relationship('LosPersonBusines')
+    person_business = relationship('PersonBusiness')

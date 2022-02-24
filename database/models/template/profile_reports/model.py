@@ -2,10 +2,10 @@ from sqlalchemy import VARCHAR, Column, DateTime, ForeignKey, text
 from sqlalchemy.dialects.oracle import NUMBER
 from sqlalchemy.orm import relationship
 
-from database.base import BaseModel
+from database import Base
 
 
-class ProfileReports(BaseModel):
+class ProfileReports(Base):
     __tablename__ = 'los_profile_reports'
     __table_args__ = {'comment': 'Mã báo cáo theo hồ sơ vay vốn'}
 
@@ -19,5 +19,5 @@ class ProfileReports(BaseModel):
     download_total = Column(NUMBER(asdecimal=False), server_default=text("0"), comment='(̣Tổng số người đã download)')
     actived_flag = Column(VARCHAR(1), comment='(̣Tình trạng đã enabled/disabled)')
 
-    loan_product_report = relationship('LosMaLoanProductReport')
-    los = relationship('LosProfile')
+    loan_product_report = relationship('MaLoanProductReport')
+    los = relationship('Profile')

@@ -36,16 +36,8 @@ class Base:
         return cls.__name__.lower()
 
 
-@as_declarative()
-class BaseModel:
-    __name__: str
-
-    @declared_attr
-    def __tablename__(cls) -> str:
-        return cls.__name__.lower()
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+class BaseModel(Base):
+    __abstract__ = True
 
     created_at = Column("CREATED_AT", DateTime, default=datetime.now, server_default=func.now())
 

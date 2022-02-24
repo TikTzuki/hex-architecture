@@ -35,7 +35,7 @@ class CollPriceCert(BaseModel):
 
     collateral_type_id = Column(VARCHAR(50), comment='Loại tài sản bảo đảm cấp 1')
 
-    collateral = relationship('VLosCollateral')
+    collateral = relationship('Collateral')
 
 
 class CollRe(BaseModel):
@@ -54,7 +54,7 @@ class CollRe(BaseModel):
     description = Column(VARCHAR(300), comment='Tình / TP Thẩm định (dùng cho tài sản không phải BĐS)')
     order_display = Column(NUMBER(asdecimal=False), comment='Thứ tự sắp xếp hiển thị')
 
-    price_cert = relationship('VLosCollPriceCert')
+    price_cert = relationship('CollPriceCert')
 
 
 class CollPriceCertAsset(BaseModel):
@@ -76,7 +76,7 @@ class CollPriceCertAsset(BaseModel):
     total_asset_value = Column(Float, comment='Tổng số tiền định giá theo tài sản')
     display_order = Column(NUMBER(asdecimal=False), comment='Thứ tự hiển thị ')
 
-    price_cert = relationship('VLosCollPriceCert')
+    price_cert = relationship('CollPriceCert')
 
 
 class CollPriceCertAssetAppraisal(BaseModel):
@@ -93,4 +93,4 @@ class CollPriceCertAssetAppraisal(BaseModel):
     amount_value = Column(Float, comment='Giá trị QSD đất theo từng GCN (VNĐ)')
     description = Column(VARCHAR(200), comment='Thông tin nghĩa vụ bảo đảm')
 
-    price_cert_asset = relationship('VLosCollPriceCertAsset')
+    price_cert_asset = relationship('CollPriceCertAsset')

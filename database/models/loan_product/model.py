@@ -29,4 +29,4 @@ class LoanProductPolicy(BaseModel):
     policy_detail_id = Column(Integer, comment='Tham chiếu trực tiếp vào bảng LOS_POLICY_DETAIL')
     loan_product_id = Column(ForeignKey('los_loan_product.id'))
 
-    loan_product = relationship('LosLoanProduct')
+    loan_product = relationship('LoanProduct')

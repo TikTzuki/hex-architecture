@@ -25,4 +25,4 @@ class FinanceTimelineAssign(BaseModel):
 
     required_flag = Column(VARCHAR(1), comment='Yêu cầu dữ liệu truyền lên')
 
-    time_line = relationship('LosFinanceTimeline')
+    time_line = relationship('FinanceTimeline')

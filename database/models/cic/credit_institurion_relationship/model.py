@@ -20,5 +20,5 @@ class PersonCreditInstitutionRelationship(BaseModel):
     search_date = Column(DateTime, comment='Ngày tra cứu')
     total_cir = Column(Integer, comment='Tổng số khoản nợ trong một tổ chức')
 
-    credit_institution = relationship('LosCreditInstitution')
-    personal_identity = relationship('LosPersonIdentity')
+    credit_institution = relationship('CreditInstitution')
+    personal_identity = relationship('PersonIdentity')

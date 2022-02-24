@@ -15,4 +15,4 @@ class CreditCollateral(BaseModel):
     collateral_value = Column(Float, comment='Giá trị bảo đảm của tài sản')
     actived_flag = Column(CHAR(1))
 
-    personal_cir = relationship('LosPerCreditInstiRel')
+    personal_cir = relationship('PersonCreditInstitutionRelationship')

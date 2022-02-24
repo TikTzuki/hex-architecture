@@ -18,4 +18,4 @@ class SourceIncomeOther(BaseModel):
     income = Column(Float)
     income_ratio = Column(Float)
 
-    person_group_income = relationship('LosPersonGroupIncome')
+    person_group_income = relationship('PersonGroupIncome')
